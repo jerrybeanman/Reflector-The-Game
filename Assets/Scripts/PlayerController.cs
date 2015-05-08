@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
-		isFlip = false;			//The wheel has yet to be turned
 		isPlayed = false;		//The user has yet to finish entering their inputs
 	}
 
@@ -73,7 +72,6 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0, j = inputHistory.Count; i < inputHistory.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
 			arrows[j-1].SetMove();																//Set the trigger for the Animator component on the Arrow
 			if(WheelController.collided && inputHistory[i] == "Space" && isFlip == false){		//If player is on wheel, pressed space bar, and wheel has not been flipped
-				isFlip = true;
 				wheel.grid.flip ();																//Flip all obstacles
 			}else{
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
