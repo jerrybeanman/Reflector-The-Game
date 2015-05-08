@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour {
 			arrows[j-1].SetMove();																//Set the trigger for the Animator component on the Arrow
 			if(WheelController.collided && inputHistory[i] == "Space" && isFlip == false){		//If player is on wheel, pressed space bar, and wheel has not been flipped
 				isFlip = true;
+				// new change to file
 				wheel.grid.flip ();																//Flip all obstacles
 			}else{
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
