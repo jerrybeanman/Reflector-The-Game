@@ -13,6 +13,8 @@ public class WheelController : MonoBehaviour {
 	// If the player activates the trigger, set collided to true (player is on the 'wheel')
 	void OnTriggerEnter(Collider hit) {
 		if (hit.gameObject.tag == "Player" && isFlip == false) {
+			AudioSource audio = GetComponent<AudioSource>();
+			audio.Play ();
 			isFlip = true;
 			collided = true;
 		}
