@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 		arrows = FindObjectsOfType (typeof(ArrowManager)) as ArrowManager[];					//Find all GameObjects with the ArrowManager script attached
 		for (int i = 0, j = inputHistory.Count; i < inputHistory.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
 			arrows[j-1].SetMove();																//Set the trigger for the Animator component on the Arrow
-			if(WheelController.collided && inputHistory[i] == "Space" ){		//If player is on wheel, pressed space bar, and wheel has not been flipped
+			if(WheelController.collided && inputHistory[i] == "Space" ){						//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.grid.flip ();																//Flip all obstacles
 			}else{
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
