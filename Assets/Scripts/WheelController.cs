@@ -25,6 +25,14 @@ public class WheelController : MonoBehaviour {
 			collided = false;
 		}
 	}
+	// Returns boolean collided
+	public bool getCollided() {
+		return collided;
+	}
+	// Sets boolean collided to false
+	public void setCollidedFalse() {
+		collided = false;
+	}
 	
 
 }
