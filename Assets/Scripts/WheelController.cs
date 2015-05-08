@@ -5,13 +5,15 @@ public class WheelController : MonoBehaviour {
 	public GridController grid;
 	
 	public static bool collided = false;
+	public bool isFlip = false;
 	
 	
 	
 	// Happens when a trigger gets activated
 	// If the player activates the trigger, set collided to true (player is on the 'wheel')
 	void OnTriggerEnter(Collider hit) {
-		if (hit.gameObject.tag == "Player") {
+		if (hit.gameObject.tag == "Player" && isFlip == false) {
+			isFlip = true;
 			collided = true;
 		}
 	}
