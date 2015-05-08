@@ -1,0 +1,3 @@
+W f f
+S f 1
+Z f f 0
