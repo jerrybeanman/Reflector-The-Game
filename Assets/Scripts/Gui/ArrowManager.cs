@@ -14,8 +14,9 @@ public class ArrowManager : MonoBehaviour {
 	public void SetMove(){
 		anim.SetTrigger("Move");
 	}
-
+	
 	public void SetCollided(){
+		print ("collided");
 		anim.SetTrigger ("Collided");
 	}
 }

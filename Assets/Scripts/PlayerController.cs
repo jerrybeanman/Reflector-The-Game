@@ -70,18 +70,42 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator RelayedInput(){
 		arrows = FindObjectsOfType (typeof(ArrowManager)) as ArrowManager[];					//Find all GameObjects with the ArrowManager script attached
 		for (int i = 0, j = inputHistory.Count; i < inputHistory.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
-			arrows[j-1].SetMove();																//Set the trigger for the Animator component on the Arrow
 			if(wheel.getCollided() && inputHistory[i] == "Space" ){								//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
 				wheel.grid.flip ();																//Flip all obstacles
 			}else{
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
-				Move ();																		//Move the player towards that position
+				Move (j);																		//Move the player towards that position
 			}
 			yield return new WaitForSeconds(1f);												//Wait 1 second before moving again
 		}
 	}
-	
+
+	void Move(int j){
+		RaycastHit hit;															
+		Ray landingRay = new Ray (curPos, direction);
+		if (Physics.Raycast (landingRay, out hit, 1)) {								//If player has detect a collidable object towards the moving direction
+			if (hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall") {		//If the object is an Obstacle or a wall
+				collided = true;					
+				newPos = curPos;													//Don't move
+				PlayerDeath.Play ();
+				MoveHelper (j, true); 
+				//StartCoroutine(LoadNextLevel(PlayerDeath));
+			} else
+				MoveHelper (j, false);
+			;									//else Move
+		} else
+			MoveHelper (j, false);
+	}
+
+	void MoveHelper(int j, bool collided){
+		if (collided)
+			arrows [j - 1].SetCollided ();
+		else
+			arrows [j - 1].SetMove ();
+			controller.Move(newPos - curPos);
+	}
+
 	void getDirection(string input){
 		curPos = controller.transform.position;
 		newPos = curPos;
@@ -100,20 +124,7 @@ public class PlayerController : MonoBehaviour {
 		direction = position;
 	}
 
-	void Move(){
-		RaycastHit hit;															
-		Ray landingRay = new Ray (curPos, direction);
-		if (Physics.Raycast (landingRay, out hit, 1)) {								//If player has detect a collidable object towards the moving direction
-			if (hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall") {		//If the object is an Obstacle or a wall
-				collided = true;					
-				newPos = curPos;													//Don't move
-				PlayerDeath.Play();
-				StartCoroutine(LoadNextLevel(PlayerDeath));
-			} else
-				controller.Move (newPos - curPos);									//else Move
-		} else
-			controller.Move(newPos - curPos);										//else Move
-	}
+
 	
 	IEnumerator LoadNextLevel(AudioSource sound) {
 		yield return new WaitForSeconds(sound.clip.length);
