@@ -14,12 +14,6 @@ public class GridController : MonoBehaviour {
 	public Transform wheel;
 	public Transform flipLine;
 
-	//---------Map variables-----------//
-	public string levelDifficulty;
-
-	//---------Holds the level information scanned in from a text file-----------//
-	public string[][] level;
-
 	//---------Allows the text file characters to be matched to their corresponding objects-----------//
 	private const string sWall = "0";
 	private const string sObstacle = "1";
@@ -31,20 +25,18 @@ public class GridController : MonoBehaviour {
 	private const string sFloor = "f";
 
 	//---------Variables used to determine the height, width and angle of the map-----------//
-	private static float width;
-	private static float height;
-	private static int angle;
+	public static float width;
+	public static float height;
+	public static int angle;
 	//private static Vector3 centerOfMap;
-	private float object_height = 0.7f;
-	private float floor_height = 0.2f;
+	public static float object_height = 0.7f;
+	public static float floor_height = 0.2f;
 
 	//----------------------------------------------//
-	
+	private string[][] level;
 	void Awake() {
-		string[] currentSceneName = Regex.Split (Application.loadedLevelName, @"\D+");
-		levelDifficulty = currentSceneName [1];
-		// Reads our text file and stores it in the array
-		level = readFile (Application.dataPath + "/StreamingAssets" + "/difficulty" + currentSceneName[1] + "-map" + currentSceneName[2] + ".txt");
+		level = LevelReader.Level;
+		print (level.Length);
 		// Sets map height
 		height = level.Length;
 		// Sets map width
@@ -134,57 +126,7 @@ public class GridController : MonoBehaviour {
 		}
 	}
 
-	// Reads our level text file and stores the information in a jagged array, then returns that array
-	public string[][] readFile(string file){
-		string text = System.IO.File.ReadAllText(file);
-		string[] lines = Regex.Split(text, "\r\n");
-		int rows = lines.Length;
-		
-		string[][] levelBase = new string[rows][];
-		for (int i = 0; i < lines.Length; i++)  {
-			string[] stringsOfLine = Regex.Split(lines[i], " ");
-			levelBase[i] = stringsOfLine;
-		}
-		return levelBase;
-	}
-
-	// Takes in a GameObject and vector3
-	// Instantiates a new obstacle at its new position, then removes the old object
-	void reInstantiate(GameObject obstacle, Vector3 newPos){
-		Instantiate (obstacle, newPos, Quaternion.identity);
-		Destroy (obstacle);
-	}
-
-	// Flips obstacles over the map axis
-	public void flip(){
-		// New vector3 to move to
-		Vector3 newPos;
-		// Holds all obstacles on the current map
-		GameObject[] obstacles = GameObject.FindGameObjectsWithTag ("Obstacle");
-		for (int i = 0; i < obstacles.Length; i++) {
-			// Depending on the angle, flips objects over the correct axis
-			switch (angle) {
-			case 0:
-				newPos = new Vector3(width - obstacles[i].transform.position.x - 1, object_height , obstacles[i].transform.position.z);
-				reInstantiate(obstacles[i], newPos);
-				break;
-			case 90:
-				newPos = new Vector3(obstacles[i].transform.position.x, object_height, -height - obstacles[i].transform.position.z + 1);
-				reInstantiate(obstacles[i], newPos);
-				break;
-			case 45:
-				//needs the newPos calcuated from algorithm based on width and length passed from the parameter
-				newPos = new Vector3(height + obstacles[i].transform.position.z - 1, object_height, -width + obstacles[i].transform.position.x + 1);
-				reInstantiate(obstacles[i], newPos);
-				break;
-			case 315:
-				//needs the newPos calcuated from algorithm based on width and length passed from the parameter
-				newPos = new Vector3(-obstacles[i].transform.position.z, object_height, -obstacles[i].transform.position.x);
-				reInstantiate(obstacles[i], newPos);
-				break;
-			}
-		}
-	}
+	
 	void spawnBoundary(){
 		var northWall = Instantiate (wall, new Vector3 (width / 2 - 0.5f, 0.5f, 1), Quaternion.identity) as GameObject;
 		northWall.transform.localScale = new Vector3 (width, 2, 1);

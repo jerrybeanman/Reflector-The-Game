@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 
 public class PlayerController : MonoBehaviour {
-
-	public GridController grid;
+	
 	public InputHistory inputs;									//Reference to the InputHistory script to instantiate direction arrows during runtime
 	public WheelController wheel; 								//Reference to the WheelController script to enable flip mechanic
 	private ArrowManager[] arrows;								//Reference to the ArrowManager script to access Animator component on the arrow gameobject
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0, j = inputHistory.Count; i < inputHistory.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
 			if(wheel.getCollided() && inputHistory[i] == "Space" ){								//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
-				wheel.grid.flip ();																//Flip all obstacles
+				wheel.flip ();																//Flip all obstacles
 			}else{
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour {
 				//StartCoroutine(LoadNextLevel(PlayerDeath));
 			} else
 				MoveHelper (j, false);
-			;									//else Move
 		} else
 			MoveHelper (j, false);
 	}
@@ -129,7 +127,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator LoadNextLevel(AudioSource sound) {
 		yield return new WaitForSeconds(sound.clip.length);
 		level++;
-		Application.LoadLevel("D" + grid.levelDifficulty + "L" + level);
+		Application.LoadLevel("D" + LevelReader.Difficulty + "L" + level);
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit){
