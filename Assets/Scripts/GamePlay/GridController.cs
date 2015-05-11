@@ -36,7 +36,7 @@ public class GridController : MonoBehaviour {
 	private string[][] level;
 	void Awake() {
 		level = LevelReader.Level;
-		print (level.Length);
+		//print (level.Length);
 		// Sets map height
 		height = level.Length;
 		// Sets map width
