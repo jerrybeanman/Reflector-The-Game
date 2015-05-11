@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void recordInputsHelper(string direction){
-		inputHistory.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
+		inputHistory.Add (direction); //inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
 	}
 
 	IEnumerator RelayedInput(){
