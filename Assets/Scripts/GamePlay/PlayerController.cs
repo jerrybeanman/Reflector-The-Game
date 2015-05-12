@@ -129,10 +129,11 @@ public class PlayerController : MonoBehaviour {
 	}
 }
 
-void recordInputsHelper(string direction){
-	inputHistory.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
-	if (direction == "Delete") {
-		GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
+	void recordInputsHelper(string direction){
+		inputHistory.Add (direction);
+		inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
+		if (direction == "Delete") {
+			GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
 			Destroy(a[a.Length -1]);
 			inputHistory.RemoveAt(inputHistory.Count-1);
 		}

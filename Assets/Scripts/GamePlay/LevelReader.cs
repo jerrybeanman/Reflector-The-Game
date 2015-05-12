@@ -24,6 +24,7 @@ public class LevelReader : MonoBehaviour {
 		Level = readFile (text);		//Read the text file and assign back into two dimensional array
 	}
 
+
 	// Reads our level text file and stores the information in a jagged array, then returns that array
 	string[][] readFile(TextAsset t){
 		string text = t.text;
