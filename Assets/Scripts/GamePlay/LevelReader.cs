@@ -13,7 +13,8 @@ public class LevelReader : MonoBehaviour {
 		Difficulty = currentSceneName [1];
 		Map = currentSceneName [2];
 		// Reads our text file and stores it in the array
-		Level = readFile (Application.dataPath + "/StreamingAssets/" + "/difficulty" + currentSceneName[1] + "-map" + currentSceneName[2] + ".txt");
+
+		Level = readFile (/*"jar:file://" + */Application.dataPath + "/StreamingAssets" /*"!/assets"*/ + "/difficulty" + currentSceneName[1] + "-map" + currentSceneName[2] + ".txt");
 	}
 	
 	// Reads our level text file and stores the information in a jagged array, then returns that array
