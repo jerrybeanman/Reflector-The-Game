@@ -199,12 +199,17 @@ public class PlayerController : MonoBehaviour {
 	
 	IEnumerator LoadNextLevel(AudioSource sound) {
 		yield return new WaitForSeconds(sound.clip.length);
-		level++;
-		Application.LoadLevel("D" + LevelReader.Difficulty + "L" + level);
+		//level++;
+		//Application.LoadLevel("D" + LevelReader.Difficulty + "L" + level);
+		//print (level);
+
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
+			level++;
+			print (level + " " + LevelReader.maps [level]);
+			Application.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level]);
 			StartCoroutine(LoadNextLevel(LevelComplete));
 			LevelComplete.Play();
 		}
