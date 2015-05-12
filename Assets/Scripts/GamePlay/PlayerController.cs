@@ -57,8 +57,12 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) 	{recordInputsHelper("L");} else 		//as a string value into 
 			if (Input.GetKeyDown (KeyCode.UpArrow)) 	{recordInputsHelper("F");} else  		//the inputHistory array
 			if (Input.GetKeyDown (KeyCode.DownArrow)) 	{recordInputsHelper("B");} else  		//and instantiate the arrow
-			if (Input.GetKeyDown (KeyCode.Space)) 		{recordInputsHelper("Space");}  		//gameobject at the same time
-
+			if (Input.GetKeyDown (KeyCode.Space)) 		{recordInputsHelper("Space");} else 		//gameobject at the same time
+			if (Input.GetKeyDown (KeyCode.Backspace) && isPlayed == false){
+				GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
+				Destroy(a[a.Length -1]);
+				inputHistory.RemoveAt(inputHistory.Count-1);
+			}
 		}
 	}
 
