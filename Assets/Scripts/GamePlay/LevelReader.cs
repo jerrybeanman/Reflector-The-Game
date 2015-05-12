@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System.IO;
 using UnityEngine.UI;
+using System.Linq;
 
 public class LevelReader : MonoBehaviour {
 	
@@ -11,6 +12,7 @@ public class LevelReader : MonoBehaviour {
 	public static string[][] Level;
 	public static string Difficulty;
 	public static string Map;
+	private readonly int LEVELSPERGAME = 4;
 
 	// Use this for initialization
 	void Awake () {
@@ -43,4 +45,16 @@ public class LevelReader : MonoBehaviour {
 		Instantiate (world);
 	}
 
+	public int[] mapPool(int filesOfDifficulty) {
+		int[] numberContainer = new int[LEVELSPERGAME];
+		int count = 0;
+		while (count < LEVELSPERGAME) {
+			int number = Random.Range (0, filesOfDifficulty - 1);
+			if (!numberContainer.Contains (number)) {
+				numberContainer [count] = number;
+				count++;
+			}
+		}
+		return numberContainer;
+	}
 }
