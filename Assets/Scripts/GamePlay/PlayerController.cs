@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public InputHistory inputs;									//Reference to the InputHistory script to instantiate direction arrows during runtime
 	public WheelController wheel; 								//Reference to the WheelController script to enable flip mechanic
 	private ArrowManager[] arrows;								//Reference to the ArrowManager script to access Animator component on the arrow gameobject
-	private bool isPlayed;										//Check if return key is pressed
+	public static bool isPlayed;										//Check if return key is pressed
 	private bool isFlip;										//Check if grid has been flipped
 	public static bool collided;								//Check if player has collided with an obstacle or wall
 
@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator LoadNextLevel(AudioSource sound) {
 		yield return new WaitForSeconds(sound.clip.length);
 		level++;
-		Application.LoadLevel("D" + LevelReader.Difficulty + "L" + level);
+		AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + "2", 1, 1, Color.black);
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit){
