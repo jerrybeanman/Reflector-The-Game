@@ -13,7 +13,8 @@ public class LevelReader : MonoBehaviour {
 	public static string Difficulty;
 	public static string Map;
 	private readonly int LEVELSPERGAME = 4;
-
+	public static int[] maps;
+	
 	// Use this for initialization
 	void Awake () {
 		string[] currentSceneName = Regex.Split (Application.loadedLevelName, @"\D+");			//Array that stores the difficulty and map name
@@ -22,8 +23,10 @@ public class LevelReader : MonoBehaviour {
 		Difficulty = currentSceneName [1];		
 		Map = currentSceneName [2];
 		Level = readFile (text);		//Read the text file and assign back into two dimensional array
+		if (maps == null) {				//Ensures we only get one instance of our map array
+			maps = mapPool (getNumberOfMaps ("difficulty" + Difficulty + "-map"));				//Fills our map array with random values
+		}
 	}
-
 
 	// Reads our level text file and stores the information in a jagged array, then returns that array
 	string[][] readFile(TextAsset t){
@@ -49,12 +52,24 @@ public class LevelReader : MonoBehaviour {
 		int[] numberContainer = new int[LEVELSPERGAME];
 		int count = 0;
 		while (count < LEVELSPERGAME) {
-			int number = Random.Range (0, filesOfDifficulty - 1);
+			int number = Random.Range (0, filesOfDifficulty + 1);
 			if (!numberContainer.Contains (number)) {
+				//print(number);
 				numberContainer [count] = number;
 				count++;
 			}
 		}
 		return numberContainer;
+	}
+	// 
+	int getNumberOfMaps (string fileName) {
+		TextAsset text;
+
+		int counter = 0;
+		do {
+			text = (TextAsset)Resources.Load (fileName + (counter + 1), typeof(TextAsset));
+			counter++;
+		} while(text != null);
+		return (counter -1);
 	}
 }
