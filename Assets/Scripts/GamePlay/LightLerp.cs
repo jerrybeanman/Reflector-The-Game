@@ -4,7 +4,8 @@ using System.Collections;
 public class LightLerp : MonoBehaviour {
 
 	public float smooth = 2;
-
+	public Color horiColor;
+	public Color vertiColor;
 	private Light lt;
 	private Color oriColor;
 
@@ -21,10 +22,10 @@ public class LightLerp : MonoBehaviour {
 
 	void ColorChanging(){
 		if (Input.GetButtonDown ("Horizontal")) {
-			lt.color = Color.Lerp (lt.color, Color.red, Time.deltaTime * smooth);
+			lt.color = Color.Lerp (lt.color, horiColor, Time.deltaTime * smooth);
 		} else 
 		if (Input.GetButtonDown ("Vertical")) {
-			lt.color = Color.Lerp(lt.color, Color.blue, Time.deltaTime * smooth);
+			lt.color = Color.Lerp(lt.color, vertiColor, Time.deltaTime * smooth);
 		}
 	}
 }
