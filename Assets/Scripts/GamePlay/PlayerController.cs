@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 
 
 public class PlayerController : MonoBehaviour {
@@ -199,21 +201,22 @@ public class PlayerController : MonoBehaviour {
 	
 	IEnumerator LoadNextLevel(AudioSource sound) {
 		yield return new WaitForSeconds(sound.clip.length);
-		//level++;
-		//Application.LoadLevel("D" + LevelReader.Difficulty + "L" + level);
-		//print (level);
-
-		//level++;
-		//AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + "2", 1, 1, Color.black);
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
 			level++;
-			print (level + " " + LevelReader.maps [level]);
-			AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
-			StartCoroutine(LoadNextLevel(LevelComplete));
-			LevelComplete.Play();
+			int lev = Int32.Parse(LevelReader.Difficulty);
+			//For the tutorial, we want the levels to play in sequence
+			if(lev == 1) {
+				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + (level + 1), .75f, .75f, Color.black);
+			}
+			//For the regular speed maps, we want the levels to be randomized
+			else {
+				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
+				StartCoroutine(LoadNextLevel(LevelComplete));
+				LevelComplete.Play();
+			}
 		}
 	}
 }
