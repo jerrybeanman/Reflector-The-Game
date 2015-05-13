@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour {
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
 			}
-			yield return new WaitForSeconds(1f);												//Wait 1 second before moving again
+			yield return new WaitForSeconds(.75f);												//Wait 1 second before moving again
 		}
 	}
 

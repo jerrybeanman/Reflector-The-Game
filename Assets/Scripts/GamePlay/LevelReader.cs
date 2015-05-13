@@ -52,9 +52,9 @@ public class LevelReader : MonoBehaviour {
 		int[] numberContainer = new int[LEVELSPERGAME];
 		int count = 0;
 		while (count < LEVELSPERGAME) {
-			int number = Random.Range (0, filesOfDifficulty + 1);
+			int number = Random.Range (2, filesOfDifficulty + 1);
 			if (!numberContainer.Contains (number)) {
-				//print(number);
+				print(number);
 				numberContainer [count] = number;
 				count++;
 			}
