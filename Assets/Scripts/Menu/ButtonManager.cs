@@ -15,7 +15,7 @@ public class ButtonManager : MonoBehaviour {
 	}
 	
 	void LoadLevel(){
-			Application.LoadLevel("D" + difficulty + "L" + level);
+			AutoFade.LoadLevel("D" + difficulty + "L" + level, 1,3, Color.gray);
 		}
 }
 

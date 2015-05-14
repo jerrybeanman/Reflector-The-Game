@@ -23,6 +23,7 @@ public class InputHistory : MonoBehaviour {
 		case "Space" : setParentAndPivot(space);	break;
 		}
 	}
+	
 
 	void setParentAndPivot(GameObject arrow){
 		GameObject parentObject = GameObject.FindGameObjectWithTag ("InputHistory");	//Search for gameobject with a tag InputHistory

@@ -3,13 +3,10 @@
 public class GameOverManager : MonoBehaviour
 {
 	public InGameGui timer;
-	public float restartDelay = 5f;         // Time to wait before restarting the level
-	
-	
 	Animator anim;                          // Reference to the animator component.
-	float restartTimer;                     // Timer to count up to restarting the level
-	
-	
+	public static int score = 0;
+
+	public static int levelsPlayed = 0;
 	void Awake ()
 	{
 		// Set up the reference.
@@ -19,17 +16,20 @@ public class GameOverManager : MonoBehaviour
 	
 	void Update ()
 	{
-
-		if(PlayerController.collided == true || timer.second == 0)
+		if(PlayerController.collided == true || InGameGui.second == 0)
 		{
-			// ... tell the animator the game is over.
-			anim.SetTrigger ("GameOver");
-			
-			// .. increment a timer to count up to restarting.
-			restartTimer += Time.deltaTime;
-			
-			// .. if it reaches the restart delay...
+			anim.SetTrigger ("Level Failed");
+			score += 0;
 
+		}
+		if (PlayerController.levelComplete == true) {
+			anim.SetTrigger("Level Complete");
+			score += InGameGui.second * 100;
+		}
+		if (PlayerController.levelComplete == true && levelsPlayed == LevelReader.maps.Length) {
+			print ("game over");
+			anim.SetTrigger("Tier Complete");
+			levelsPlayed = 0;
 		}
 	}
 }
