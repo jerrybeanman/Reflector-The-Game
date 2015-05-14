@@ -28,5 +28,15 @@ public class InGameGui : MonoBehaviour {
 		Timer.text = second + "s";	//Display timer on canvas
 		if (PlayerController.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
 			startTime -= Time.deltaTime;
+		if (second == 0) {
+			int lev = Int32.Parse(LevelReader.Difficulty);
+			//For the tutorial, we want the levels to play in sequence
+			if (lev == 1) {
+				AutoFade.LoadLevel ("D" + LevelReader.Difficulty + "L" + (PlayerController.level + 1), .75f, .75f, Color.black);
+			} else {
+				if(PlayerController.level != LevelReader.maps.Length)
+					AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[PlayerController.level], .75f, .75f, Color.black);
+			}
+		}
 	}
 }
