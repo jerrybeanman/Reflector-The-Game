@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 
 
 public class PlayerController : MonoBehaviour {
@@ -204,16 +206,27 @@ public class PlayerController : MonoBehaviour {
 
 	
 	IEnumerator LoadNextLevel(AudioSource sound) {
+
 		LevelCompleteSound.Play();
-		yield return new WaitForSeconds(3f);
-		if(level != LevelReader.maps.Length)
-			AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
+		yield return new WaitForSeconds(1.5f);
+
+
+		int lev = Int32.Parse(LevelReader.Difficulty);
+		//For the tutorial, we want the levels to play in sequence
+		if (lev == 1) {
+			AutoFade.LoadLevel ("D" + LevelReader.Difficulty + "L" + (level + 1), .75f, .75f, Color.black);
+		} else {
+			if(level != LevelReader.maps.Length)
+				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
+		}
+
 	}
 
 	void OnTriggerEnter(Collider hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
 			GameOverManager.levelsPlayed++;
 			level++;
+
 			levelComplete = true;
 			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class InGameGui : MonoBehaviour {
 
@@ -11,7 +12,11 @@ public class InGameGui : MonoBehaviour {
 
 
 	void Awake(){
+		int lev = Int32.Parse (LevelReader.Difficulty);
 		second = (int)startTime;
+		if (lev == 1) {
+			level.text = LevelReader.Difficulty + "." + (PlayerController.level+1); 
+		}else
 		level.text = LevelReader.Difficulty + "." + LevelReader.maps[PlayerController.level];
 	}
 	
