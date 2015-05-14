@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.Linq;
 
 public class LevelReader : MonoBehaviour {
-	
 	public GameObject canvasUI;
 	public GameObject world;
 	public static string[][] Level;

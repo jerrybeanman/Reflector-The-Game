@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour {
 	private float minSwipeDist  = 50.0f;
 	private float maxSwipeTime = 0.5f;
 
+	/*[SerializeField] private Button undoButton = null; // assign     in the editor
+	[SerializeField] private Button flipButton = null; // assign     in the editor
+	[SerializeField] private Button runButton = null; // assign     in the editor*/
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
 		isPlayed = false;		//The user has yet to finish entering their inputs
@@ -49,17 +52,63 @@ public class PlayerController : MonoBehaviour {
 		AudioSource[] sounds = GetComponents<AudioSource>();
 		LevelCompleteSound = sounds [0];
 		PlayerDeath = sounds [1];
+	/*	undoButton.onClick.AddListener(() => { 
+			print ("hi");
+			recordInputsHelper("Delete");
+		});
+		flipButton.onClick.AddListener(() => { 
+			print ("hi");
+			recordInputsHelper("Space");
+		});
+		runButton.onClick.AddListener(() => { 
+			print ("hi");
+			if(isPlayed == false)
+				isPlayed = true;
+				StartCoroutine("RelayedInput");
+		});*/
 	}
-
-
+	
+	
 	void Update() {
 		recordInputs ();												//Record any keystrokes entered by the user into the inputHistory array
+		//recordButtons ();
 		if (Input.GetKeyDown (KeyCode.Return) && isPlayed == false) {	//If user presses the return key and only pressed once
 			isPlayed = true;
-
 			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
 		}
 	}
+
+
+	/*private bool isWheelClicked = false;
+	private bool isRunClicked = false;
+	private bool isUndoClicked = false;
+	void OnGUI() {
+		float height = Screen.height;
+		float width = Screen.width;
+		if (GUI.Button (new Rect (10, 250, 40, 40), "Flip!")) {
+			isWheelClicked = true;
+		} else if (GUI.Button (new Rect (90, 250, 40, 40), "Run!")) {	
+			isRunClicked = true;
+		} else if (GUI.Button (new Rect (170, 250, 40, 40), "Undo")) {
+			isUndoClicked = true;
+		}
+	}
+	
+	void recordButtons() {
+		if (isWheelClicked) {    
+			recordInputsHelper ("Space");
+			isWheelClicked = false;
+		} else if (isRunClicked && isPlayed == false) {
+			isPlayed = true;
+			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
+			isRunClicked = false;
+		} else if (isUndoClicked) {
+			recordInputsHelper("Delete");
+			isUndoClicked = false;
+		}
+	}*/
+	
+	
 	
 	void recordInputs(){
 		if (isPlayed == false) {										//If user has not entered the return key
