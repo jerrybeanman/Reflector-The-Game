@@ -13,7 +13,7 @@ public class GameOverManager : MonoBehaviour
 		anim = GetComponent <Animator> ();
 	}
 	
-	
+	private bool addOnce = false;
 	void Update ()
 	{
 		if(PlayerController.collided == true || InGameGui.second == 0)
@@ -24,7 +24,10 @@ public class GameOverManager : MonoBehaviour
 		}
 		if (PlayerController.levelComplete == true) {
 			anim.SetTrigger("Level Complete");
-			score += InGameGui.second * 100;
+			if(addOnce == false){
+				score += InGameGui.second * 10;
+				addOnce = true;
+			}
 		}
 		if (PlayerController.levelComplete == true && levelsPlayed == LevelReader.maps.Length) {
 			print ("game over");
