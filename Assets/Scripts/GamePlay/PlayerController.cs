@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour {
 	private float minSwipeDist  = 50.0f;
 	private float maxSwipeTime = 0.5f;
 
+	public Button undoButton;
+	public Button wheelButton;
+	public Button playButton;
+
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
 		isPlayed = false;		//The user has yet to finish entering their inputs
@@ -69,12 +73,18 @@ public class PlayerController : MonoBehaviour {
 	void OnGUI() {
 		float height = Screen.height;
 		float width = Screen.width;
-		if (GUI.Button (new Rect (10, 250, 40, 40), "Flip!")) {
-			isWheelClicked = true;
-		} else if (GUI.Button (new Rect (90, 250, 40, 40), "Run!")) {	
-			isRunClicked = true;
-		} else if (GUI.Button (new Rect (170, 250, 40, 40), "Undo")) {
+		float UndoWidth = width - Screen.width * 0.9f;
+		float UndoHeight = height - Screen.height * 0.2f;
+		float FlipWidth = width - Screen.width * 0.6f;
+		float FlipHeight = height - Screen.height * 0.2f;
+		float RunWidth = width - Screen.width * 0.3f;
+		float RunHeight = height - Screen.height * 0.2f;
+		if (GUI.Button (new Rect (UndoWidth, UndoHeight, 40, 40), "Undo")) {
 			isUndoClicked = true;
+		} else if (GUI.Button (new Rect (FlipWidth, FlipHeight, 40, 40), "Flip!")) {	
+			isWheelClicked = true;
+		} else if (GUI.Button (new Rect (RunWidth, RunHeight, 40, 40), "Run")) {
+			isRunClicked = true;
 		}
 	}
 	
