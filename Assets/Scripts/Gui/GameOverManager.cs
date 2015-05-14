@@ -16,11 +16,11 @@ public class GameOverManager : MonoBehaviour
 	
 	void Update ()
 	{
-		if(PlayerController.collided == true || InGameGui.second == 0)
+		if(PlayerController.collided == true || InGameGui.second == 0 || PlayerController.stranded == true)
 		{
 			anim.SetTrigger ("Level Failed");
 			score += 0;
-
+			
 		}
 		if (PlayerController.levelComplete == true) {
 			anim.SetTrigger("Level Complete");
