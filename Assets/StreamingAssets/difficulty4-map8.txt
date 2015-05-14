@@ -1,3 +1,0 @@
-f f S
-f 1 W
-Z f f 0

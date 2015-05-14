@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 	AudioSource LevelCompleteSound;
 
 	private int temp;											
-	private static int level = 0;								//Current level of tier the player object is on
+	public static int level = 0;								//Current level of tier the player object is on
 
 	private List<string> inputHistory = new List<string> ();	//Array to simulate keystroke's using array of strings
 
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour {
 	private bool isSwipe = false;
 	private float minSwipeDist  = 50.0f;
 	private float maxSwipeTime = 0.5f;
-	
 
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
@@ -54,6 +53,7 @@ public class PlayerController : MonoBehaviour {
 		recordInputs ();												//Record any keystrokes entered by the user into the inputHistory array
 		if (Input.GetKeyDown (KeyCode.Return) && isPlayed == false) {	//If user presses the return key and only pressed once
 			isPlayed = true;
+
 			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
 		}
 	}
@@ -130,21 +130,21 @@ public class PlayerController : MonoBehaviour {
 	}
 }
 
-	void recordInputsHelper(string direction){
+	public void recordInputsHelper(string direction){
 		if (direction == "Delete") {
-			GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
-			Destroy(a[a.Length -1]);
-			inputHistory.RemoveAt(inputHistory.Count-1);
-		}else
+			GameObject[] a = GameObject.FindGameObjectsWithTag ("Arrow");
+			Destroy (a [a.Length - 1]);
+			inputHistory.RemoveAt (inputHistory.Count - 1);
+		} else 
 			inputHistory.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
 	}
 
-	IEnumerator RelayedInput(){
+	public IEnumerator RelayedInput(){
 		arrows = FindObjectsOfType (typeof(ArrowManager)) as ArrowManager[];					//Find all GameObjects with the ArrowManager script attached
 		for (int i = 0, j = inputHistory.Count; i < inputHistory.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
 			if(wheel.getCollided() && inputHistory[i] == "Space" ){								//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
-				wheel.flip ();																//Flip all obstacles
+				wheel.flip ();																	//Flip all obstacles
 			}else{
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
@@ -208,12 +208,6 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds(3f);
 		if(level != LevelReader.maps.Length)
 			AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
-		//level++;
-		//Application.LoadLevel("D" + LevelReader.Difficulty + "L" + level);
-		//print (level);
-
-		//level++;
-		//AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + "2", 1, 1, Color.black);
 	}
 
 	void OnTriggerEnter(Collider hit){

@@ -7,11 +7,12 @@ public class InGameGui : MonoBehaviour {
 	public Text Timer;				//Text component to display onto the canvas
 	public Text level;				//Current tier and level the user is on
 	public float startTime;	//The starting count down time
-	public int second;				//the unit is in seconds
+	public static int second;				//the unit is in seconds
+
 
 	void Awake(){
 		second = (int)startTime;
-		level.text = LevelReader.Difficulty + "." + LevelReader.Map;
+		level.text = LevelReader.Difficulty + "." + LevelReader.maps[PlayerController.level];
 	}
 	
 	// Update is called once per frame
