@@ -13,8 +13,6 @@ public class WheelController : MonoBehaviour {
 	// If the player activates the trigger, set collided to true (player is on the 'wheel')
 	void OnTriggerEnter(Collider hit) {
 		if (hit.gameObject.tag == "Player" && isFlip == false) {
-			AudioSource audio = GetComponent<AudioSource>();
-			audio.Play ();
 			isFlip = true;
 			collided = true;
 		}
@@ -24,10 +22,6 @@ public class WheelController : MonoBehaviour {
 		if (hit.gameObject.tag == "Player") {
 			collided = false;
 		}
-	}
-	// Returns boolean collided
-	public bool getCollided() {
-		return collided;
 	}
 	// Sets boolean collided to false
 	public void setCollidedFalse() {
@@ -40,9 +34,14 @@ public class WheelController : MonoBehaviour {
 		Instantiate (obstacle, newPos, Quaternion.identity);
 		Destroy (obstacle);
 	}
-	
+	public bool getCollided(){
+		return collided;
+	}
+
 	// Flips obstacles over the map axis
 	public void flip(){
+		AudioSource audio = GetComponent<AudioSource>();
+		audio.Play ();
 		// New vector3 to move to
 		Vector3 newPos;
 		// Holds all obstacles on the current map

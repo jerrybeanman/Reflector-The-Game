@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour {
 	public static bool isPlayed;										//Check if return key is pressed
 	private bool isFlip;										//Check if grid has been flipped
 	public static bool collided;								//Check if player has collided with an obstacle or wall
-
+	public static bool levelComplete;
 	AudioSource PlayerDeath;
-	AudioSource LevelComplete;
+	AudioSource LevelCompleteSound;
 
 	private int temp;											
 	private static int level = 0;								//Current level of tier the player object is on
@@ -29,24 +29,25 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 newPos;										//The new Vector3 of the player to move to
 	private Vector3 direction;									//The direction value for raycasting obstacles and walls
 
-
+	
 	private float fingerStartTime  = 0.0f;
 	private Vector2 fingerStartPos = Vector2.zero;
-	
 	private bool isSwipe = false;
 	private float minSwipeDist  = 50.0f;
 	private float maxSwipeTime = 0.5f;
 	
+
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
 		isPlayed = false;		//The user has yet to finish entering their inputs
+		levelComplete = false;
 	}
 
 	void Start(){
 		controller = GetComponent<CharacterController>();
 		temp = level;
 		AudioSource[] sounds = GetComponents<AudioSource>();
-		LevelComplete = sounds [0];
+		LevelCompleteSound = sounds [0];
 		PlayerDeath = sounds [1];
 	}
 
@@ -135,7 +136,6 @@ public class PlayerController : MonoBehaviour {
 		if (direction == "Delete") {
 			GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
 			Destroy(a[a.Length -1]);
-			print(inputHistory[inputHistory.Count-1]);
 			inputHistory.RemoveAt(inputHistory.Count-1);
 		}else
 			inputHistory.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour {
 				getDirection(inputHistory[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
 			}
-			yield return new WaitForSeconds(.75f);												//Wait 1 second before moving again
+			yield return new WaitForSeconds(0.8f);												//Wait 1 second before moving again
 		}
 	}
 
@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour {
 				newPos = curPos;													//Don't move
 				PlayerDeath.Play ();
 				MoveHelper (j, true); 
+				GameOverManager.levelsPlayed++;
 				//StartCoroutine(LoadNextLevel(PlayerDeath));
 			} else
 				MoveHelper (j, false);
@@ -175,8 +176,13 @@ public class PlayerController : MonoBehaviour {
 		if (collided)
 			arrows [j - 1].SetCollided ();
 		else
-			arrows [j - 1].SetMove ();
-			controller.Move(newPos - curPos);
+			StartCoroutine(setArrowAnimation (j));
+	}
+
+	IEnumerator setArrowAnimation(int j){
+		arrows [j - 1].SetMove ();
+		yield return new WaitForSeconds (0.75f);
+		controller.Move(newPos - curPos);
 	}
 
 	void getDirection(string input){
@@ -200,23 +206,28 @@ public class PlayerController : MonoBehaviour {
 
 	
 	IEnumerator LoadNextLevel(AudioSource sound) {
-		yield return new WaitForSeconds(sound.clip.length);
+
+		LevelCompleteSound.Play();
+		yield return new WaitForSeconds(1.5f);
+
+
+		int lev = Int32.Parse(LevelReader.Difficulty);
+		//For the tutorial, we want the levels to play in sequence
+		if (lev == 1) {
+			AutoFade.LoadLevel ("D" + LevelReader.Difficulty + "L" + (level + 1), .75f, .75f, Color.black);
+		} else {
+			if(level != LevelReader.maps.Length)
+				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
+		}
 	}
 
-	void OnControllerColliderHit(ControllerColliderHit hit){
+	void OnTriggerEnter(Collider hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
+			GameOverManager.levelsPlayed++;
 			level++;
-			int lev = Int32.Parse(LevelReader.Difficulty);
-			//For the tutorial, we want the levels to play in sequence
-			if(lev == 1) {
-				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + (level + 1), .75f, .75f, Color.black);
-			}
-			//For the regular speed maps, we want the levels to be randomized
-			else {
-				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
-				StartCoroutine(LoadNextLevel(LevelComplete));
-				LevelComplete.Play();
-			}
+
+			levelComplete = true;
+			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}
 	}
 }
