@@ -37,9 +37,6 @@ public class PlayerController : MonoBehaviour {
 	private float minSwipeDist  = 50.0f;
 	private float maxSwipeTime = 0.5f;
 
-	/*[SerializeField] private Button undoButton = null; // assign     in the editor
-	[SerializeField] private Button flipButton = null; // assign     in the editor
-	[SerializeField] private Button runButton = null; // assign     in the editor*/
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
 		isPlayed = false;		//The user has yet to finish entering their inputs
@@ -52,20 +49,7 @@ public class PlayerController : MonoBehaviour {
 		AudioSource[] sounds = GetComponents<AudioSource>();
 		LevelCompleteSound = sounds [0];
 		PlayerDeath = sounds [1];
-	/*	undoButton.onClick.AddListener(() => { 
-			print ("hi");
-			recordInputsHelper("Delete");
-		});
-		flipButton.onClick.AddListener(() => { 
-			print ("hi");
-			recordInputsHelper("Space");
-		});
-		runButton.onClick.AddListener(() => { 
-			print ("hi");
-			if(isPlayed == false)
-				isPlayed = true;
-				StartCoroutine("RelayedInput");
-		});*/
+
 	}
 	
 	
@@ -79,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-	/*private bool isWheelClicked = false;
+	private bool isWheelClicked = false;
 	private bool isRunClicked = false;
 	private bool isUndoClicked = false;
 	void OnGUI() {
@@ -106,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 			recordInputsHelper("Delete");
 			isUndoClicked = false;
 		}
-	}*/
+	}
 	
 	
 	
