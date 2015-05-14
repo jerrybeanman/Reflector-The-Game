@@ -9,9 +9,13 @@ public class ButtonManager : MonoBehaviour {
 	[SerializeField] private Button MyButton = null; // assign in the editor
 	
 	void Start() { 
-		MyButton.onClick.AddListener(() => { 
-			LoadLevel();
-		});
+		if (difficulty.Equals ("0")) {
+			Application.Quit ();
+		} else {
+			MyButton.onClick.AddListener (() => { 
+				LoadLevel ();
+			});
+		}
 	}
 	
 	void LoadLevel(){
