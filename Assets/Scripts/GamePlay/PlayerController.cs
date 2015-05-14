@@ -286,4 +286,8 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}
 	}
+
+	public static void setStrandedFalse() {
+		stranded = false;
+	}
 }
