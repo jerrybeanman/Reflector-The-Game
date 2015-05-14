@@ -1,0 +1,4 @@
+f f W f
+1 f 1 f
+W 1 f f
+S f 1 Z 0

@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update() {
 		recordInputs ();												//Record any keystrokes entered by the user into the inputHistory array
-		//recordButtons ();
+		recordButtons ();
 		if (Input.GetKeyDown (KeyCode.Return) && isPlayed == false) {	//If user presses the return key and only pressed once
 			isPlayed = true;
 			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
