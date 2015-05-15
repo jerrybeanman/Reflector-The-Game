@@ -7,8 +7,7 @@ public class WheelController : MonoBehaviour {
 	public static bool collided = false;
 	public bool isFlip = false;
 
-
-
+	
 	// Happens when a trigger gets activated
 	// If the player activates the trigger, set collided to true (player is on the 'wheel')
 	void OnTriggerEnter(Collider hit) {

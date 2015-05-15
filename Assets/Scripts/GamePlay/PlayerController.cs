@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour {
 				//GameOverManager.levelsPlayed++;
 				//level++;
 				//nextLevel();
+				print("hello");
 				StartCoroutine(LoadNextLevelFail());
 	
 				//StartCoroutine(LoadNextLevel(PlayerDeath));
@@ -270,6 +271,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator LoadNextLevelFail() {
+		print ("level is " + level);
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;
 		level++;
