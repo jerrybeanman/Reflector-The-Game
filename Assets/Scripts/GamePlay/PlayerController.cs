@@ -279,10 +279,9 @@ public class PlayerController : MonoBehaviour {
 	void nextLevel() {
 		int lev = Int32.Parse(LevelReader.Difficulty);
 		//For the tutorial, we want the levels to play in sequence
-		if (lev == 1) {
+		if (lev == 1 && level != 8) {
 			AutoFade.LoadLevel ("D" + LevelReader.Difficulty + "L" + (level + 1), .75f, .75f, Color.black);
-		} else {
-			if(level != LevelReader.maps.Length)
+		} else if (level != LevelReader.maps.Length && lev != 1) {
 				AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
 		}
 	}
