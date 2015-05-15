@@ -82,11 +82,11 @@ public class GridController : MonoBehaviour {
 					Instantiate(floor, new Vector3(x, floor_height , -z), Quaternion.identity);
 					break;
 				case sEnd:
-					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.identity);
+					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.Euler(90,0,0));
 					Instantiate(floor, new Vector3(x, floor_height , -z), Quaternion.identity);
 					break;
 				case sWheel:
-					Instantiate(wheel, new Vector3(x, object_height, -z), Quaternion.identity);
+					Instantiate(wheel, new Vector3(x, 0.2f, -z), Quaternion.identity);
 					Instantiate(floor, new Vector3(x, floor_height , -z), Quaternion.identity);
 					break;
 				case sObstacleAndEnd:
