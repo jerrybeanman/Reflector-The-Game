@@ -9,11 +9,11 @@ public class GameOverNextTierButton : MonoBehaviour {
 	
 	void Start() { 
 		MainMenuButton.onClick.AddListener(() => { 
-			LoadLevel();
+			Loadlevel();
 		});
 	}
 	
-	void LoadLevel(){
+	void Loadlevel(){
 		int newDifficulty = int.Parse (LevelReader.Difficulty) + 1;
 		AutoFade.LoadLevel("D" + newDifficulty + "L1", 1,3, Color.gray);
 	}

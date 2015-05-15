@@ -6,6 +6,7 @@ using System;
 public class InGameGui : MonoBehaviour {
 
 	public Text score;
+	public Text totalScore;
 	public Text Timer;				//Text component to display onto the canvas
 	public Text level;				//Current tier and level the user is on
 	public float startTime;	//The starting count down time
@@ -16,6 +17,7 @@ public class InGameGui : MonoBehaviour {
 		int lev = Int32.Parse (LevelReader.Difficulty);
 		second = (int)startTime;
 		score.text = GameOverManager.score.ToString();
+		totalScore.text = "Score: " + score.text;
 		if (lev == 1) {
 			level.text = LevelReader.Difficulty + "." + (PlayerController.level+1); 
 		}else

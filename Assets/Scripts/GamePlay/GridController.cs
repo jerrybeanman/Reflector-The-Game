@@ -6,6 +6,7 @@ using System;
 
 public class GridController : MonoBehaviour {
 	//---------Pieces of the game-----------//
+	public GameObject highScore;
 	public Transform player;
 	public Transform floor;
 	public Transform obstacle;
@@ -48,6 +49,10 @@ public class GridController : MonoBehaviour {
 		spawnLine ();
 		// spawn the boundary
 		spawnBoundary();
+	}
+
+	void Start(){
+		Instantiate (highScore);
 	}
 
 	// Spawns the level when called

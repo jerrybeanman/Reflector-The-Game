@@ -79,11 +79,12 @@ public class PlayerController : MonoBehaviour {
 		float FlipHeight = height - Screen.height * 0.2f;
 		float RunWidth = width - Screen.width * 0.3f;
 		float RunHeight = height - Screen.height * 0.2f;
-		if (GUI.Button (new Rect (UndoWidth, UndoHeight, 40, 40), "Undo")) {
+		float ButtonSize = width * 0.2f;
+		if (GUI.Button (new Rect (UndoWidth, UndoHeight, ButtonSize, ButtonSize), "Undo")) {
 			isUndoClicked = true;
-		} else if (GUI.Button (new Rect (FlipWidth, FlipHeight, 40, 40), "Flip!")) {	
+		} else if (GUI.Button (new Rect (FlipWidth, FlipHeight, ButtonSize, ButtonSize), "Flip!")) {	
 			isWheelClicked = true;
-		} else if (GUI.Button (new Rect (RunWidth, RunHeight, 40, 40), "Run")) {
+		} else if (GUI.Button (new Rect (RunWidth, RunHeight, ButtonSize, ButtonSize), "Run")) {
 			isRunClicked = true;
 		}
 	}
