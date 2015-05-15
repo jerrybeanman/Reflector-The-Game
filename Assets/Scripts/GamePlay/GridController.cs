@@ -147,7 +147,12 @@ public class GridController : MonoBehaviour {
 		
 	// Returns the center of the map
 	public Vector3 getCenter(){
-		return new Vector3 (width / 2f - .5f, (width + height)*1.3f, -height / 2f + .5f);
+		float cameraZoom = 1.3f;
+		float mapSize = (width + height);
+		if (mapSize >= 7) {
+			cameraZoom = 1.1f;
+		}
+		return new Vector3 (width / 2f - .5f, mapSize * cameraZoom, -height / 2f + .5f);
 	}
 
 }
