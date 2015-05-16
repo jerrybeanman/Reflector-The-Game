@@ -7,6 +7,6 @@ public class SpinStar : MonoBehaviour {
 	
 	
 	void Update () {
-		transform.Rotate(RandomRotationStrenght,RandomRotationStrenght,RandomRotationStrenght);
+		transform.Rotate(0,0,RandomRotationStrenght);
 	}
 }

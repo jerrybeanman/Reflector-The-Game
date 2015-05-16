@@ -6,7 +6,6 @@ using System;
 
 public class GridController : MonoBehaviour {
 	//---------Pieces of the game-----------//
-	public GameObject highScore;
 	public Transform player;
 	public Transform floor;
 	public Transform obstacle;
@@ -50,10 +49,7 @@ public class GridController : MonoBehaviour {
 		// spawn the boundary
 		spawnBoundary();
 	}
-
-	void Start(){
-		Instantiate (highScore);
-	}
+	
 
 	// Spawns the level when called
 	void spawnLevel(){
@@ -91,7 +87,7 @@ public class GridController : MonoBehaviour {
 					break;
 				case sObstacleAndEnd:
 					Instantiate(obstacle, new Vector3(x, object_height, -z), Quaternion.identity);
-					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.identity);
+					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.Euler(90,0,0));
 					Instantiate(floor, new Vector3(x, floor_height, -z), Quaternion.identity);
 					break;
 				}

@@ -8,7 +8,6 @@ public class InputReader : MonoBehaviour {
 
 	void Awake(){
 		inputStrings = new List<string> ();
-		inputStrings.Clear ();
 	}
 
 	public void recordInputs(){

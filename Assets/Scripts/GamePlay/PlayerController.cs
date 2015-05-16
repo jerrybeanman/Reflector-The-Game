@@ -37,10 +37,6 @@ public class PlayerController : MonoBehaviour {
 	private float minSwipeDist  = 50.0f;
 	private float maxSwipeTime = 0.5f;
 
-	public Button undoButton;
-	public Button wheelButton;
-	public Button playButton;
-
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
 		isPlayed = false;		//The user has yet to finish entering their inputs
@@ -213,17 +209,11 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;															
 		Ray landingRay = new Ray (curPos, direction);
 		if (Physics.Raycast (landingRay, out hit, 1)) {								//If player has detect a collidable object towards the moving direction
-			if ((hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall") && collided == true) {		//If the object is an Obstacle or a wall
+			if (hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall") {		//If the object is an Obstacle or a wall
 				collided = true;					
 				newPos = curPos;													//Don't move
-				//PlayerDeath.Play ();
-				MoveHelper (j, true); 
-				//GameOverManager.levelsPlayed++;
-				//level++;
-				//nextLevel();
+				MoveHelper (j, collided); 
 				StartCoroutine(LoadNextLevelFail());
-	
-				//StartCoroutine(LoadNextLevel(PlayerDeath));
 			} else
 				MoveHelper (j, false);
 		} else
@@ -231,15 +221,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void MoveHelper(int j, bool collided){
-		if (collided)
+		if (collided) {
 			arrows [j - 1].SetCollided ();
-		else
+		}else
 			StartCoroutine(setArrowAnimation (j));
 	}
 
 	IEnumerator setArrowAnimation(int j){
 		arrows [j - 1].SetMove ();
 		yield return new WaitForSeconds (0.75f);
+		controller.transform.rotation = Quaternion.LookRotation (direction, Vector3.up);
 		controller.Move(newPos - curPos);
 	}
 
