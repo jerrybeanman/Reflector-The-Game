@@ -28,7 +28,7 @@ public class InGameGui : MonoBehaviour {
 	void Update () {
 		second = (int)startTime;
 		Timer.text = second + "s";	//Display timer on canvas
-		if (PlayerController.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
+		if (InputReader.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
 			startTime -= Time.deltaTime;
 		if (second == 0) {
 			int lev = Int32.Parse(LevelReader.Difficulty);
