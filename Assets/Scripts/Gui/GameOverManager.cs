@@ -20,8 +20,6 @@ public class GameOverManager : MonoBehaviour
 		{
 			anim.SetTrigger ("Level Failed");
 			score += 0;
-			PlayerController.level++;
-			print(PlayerController.level++);
 			PlayerController.setStrandedFalse();
 		}
 		if (PlayerController.levelComplete == true) {

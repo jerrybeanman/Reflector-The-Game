@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 		RaycastHit hit;															
 		Ray landingRay = new Ray (curPos, direction);
 		if (Physics.Raycast (landingRay, out hit, 1)) {								//If player has detect a collidable object towards the moving direction
-			if ((hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall") && collided == true) {		//If the object is an Obstacle or a wall
+			if ((hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall")) {		//If the object is an Obstacle or a wall
 				collided = true;					
 				newPos = curPos;													//Don't move
 				//PlayerDeath.Play ();
@@ -221,7 +221,6 @@ public class PlayerController : MonoBehaviour {
 				//GameOverManager.levelsPlayed++;
 				//level++;
 				//nextLevel();
-				print("hello");
 				StartCoroutine(LoadNextLevelFail());
 	
 				//StartCoroutine(LoadNextLevel(PlayerDeath));
@@ -271,7 +270,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator LoadNextLevelFail() {
-		print ("level is " + level);
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;
 		level++;
