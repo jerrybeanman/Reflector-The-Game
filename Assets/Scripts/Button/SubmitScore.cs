@@ -11,7 +11,7 @@ public class SubmitScore : MonoBehaviour {
 	
 	void Start() { 
 		DoneButton.onClick.AddListener(() => { 
-			Highscores.AddNewHighscore("asdf", Int32.Parse(score.text));
+			Highscores.AddNewHighscore(name.text, Int32.Parse(score.text));
 		});
 	}
 

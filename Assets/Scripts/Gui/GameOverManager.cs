@@ -29,7 +29,7 @@ public class GameOverManager : MonoBehaviour
 				addOnce = true;
 			}
 		}
-		if (PlayerController.levelComplete == true && levelsPlayed == LevelReader.maps.Length && !LevelReader.Difficulty.Equals("1")) {
+		if (PlayerController.levelComplete == true && levelsPlayed == ButtonManager.maps.Length && !LevelReader.Difficulty.Equals("1")) {
 			print ("game over");
 			anim.SetTrigger("Tier Complete");
 			levelsPlayed = 0;

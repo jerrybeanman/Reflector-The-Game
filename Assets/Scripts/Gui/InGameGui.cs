@@ -19,16 +19,16 @@ public class InGameGui : MonoBehaviour {
 		score.text = GameOverManager.score.ToString();
 		totalScore.text = "Score: " + score.text;
 		if (lev == 1) {
-			level.text = LevelReader.Difficulty + "." + (PlayerController.level+1); 
-		}else
-		level.text = LevelReader.Difficulty + "." + LevelReader.maps[PlayerController.level];
+			level.text = LevelReader.Difficulty + "." + (PlayerController.level + 1); 
+		} else
+			level.text = LevelReader.Difficulty + "." + ButtonManager.maps[PlayerController.level];
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		second = (int)startTime;
 		Timer.text = second + "s";	//Display timer on canvas
-		if (PlayerController.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
+		if (InputReader.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
 			startTime -= Time.deltaTime;
 		if (second == 0) {
 			int lev = Int32.Parse(LevelReader.Difficulty);
