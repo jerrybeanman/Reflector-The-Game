@@ -7,13 +7,8 @@ public class ButtonManager : MonoBehaviour {
 	public string difficulty;
 	public static string staticDifficulty;
 	public static int[] maps;
-	//public RandomLevelGenerator randomLevelGen;
 	[SerializeField] private Button MyButton = null; // assign in the editor
-
-	void Awake() {
-
-	}
-
+	
 	void Start() { 
 		MyButton.onClick.AddListener (() => { 
 			staticDifficulty = difficulty;
@@ -22,8 +17,13 @@ public class ButtonManager : MonoBehaviour {
 	}
 	
 	void LoadLevel(){
-		maps = RandomLevelGenerator.mapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficulty + "-map")); //fix "1"
-		AutoFade.LoadLevel("D" + difficulty + "L" + maps[0], 1,3, Color.gray); //fix "1"
+		if (difficulty.Equals ("1")) {
+			maps = RandomLevelGenerator.linearMapPool();
+			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+		} else {
+			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficulty + "-map"));
+			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+		}
 	}
 
 	public int getMapsLength() {
