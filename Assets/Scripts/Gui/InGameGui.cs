@@ -36,8 +36,8 @@ public class InGameGui : MonoBehaviour {
 			if (lev == 1) {
 				AutoFade.LoadLevel ("D" + LevelReader.Difficulty + "L" + (PlayerController.level + 1), .75f, .75f, Color.black);
 			} else {
-				if(PlayerController.level != LevelReader.maps.Length)
-					AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[PlayerController.level], .75f, .75f, Color.black);
+				if(PlayerController.level != ButtonManager.maps.Length)
+					AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + ButtonManager.maps[PlayerController.level], .75f, .75f, Color.black);
 			}
 		}
 	}
