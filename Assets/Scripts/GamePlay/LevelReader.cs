@@ -11,9 +11,7 @@ public class LevelReader : MonoBehaviour {
 	public static string[][] Level;
 	public static string Difficulty;
 	public static string Map;
-	private readonly int LEVELSPERGAME = 4;
 	public static int[] maps;
-	//public ButtonManager buttonManager;
 	
 	// Use this for initialization
 	void Awake () {
