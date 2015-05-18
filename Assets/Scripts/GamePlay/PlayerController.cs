@@ -27,20 +27,26 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 newPos;										//The new Vector3 of the player to move to
 	private Vector3 direction;									//The direction value for raycasting obstacles and walls
 	
-
+	private Button playButton;
 	void Awake(){
 		collided = false;		//The player has yet to collide with anything
 		levelComplete = false;
 	}
 
 	void Start(){
+		playButton = GameObject.Find ("PlayButton").GetComponent<Button> ();
 		controller = GetComponent<CharacterController>();
 		inputs = GetComponent<InputReader> ();
 		temp = level;
 		AudioSource[] sounds = GetComponents<AudioSource>();
 		LevelCompleteSound = sounds [0];
 		PlayerDeath = sounds [1];
-
+		playButton.onClick.AddListener (() => {
+			if(InputReader.isPlayed == false){
+				InputReader.isPlayed = true;
+				StartCoroutine("RelayedInput");
+			}
+		});
 	}
 	
 	

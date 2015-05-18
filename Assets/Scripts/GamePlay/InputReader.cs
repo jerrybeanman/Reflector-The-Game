@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class InputReader : MonoBehaviour {
 	public InputHistory inputs;										//Reference to the InputHistory script to instantiate direction arrows during runtimepublic 
 	public List<string> inputStrings = new List<string> ();			//Array to simulate keystroke's using array of strings
+
 	public static bool isPlayed;
-	
+
+	private Button undoButton;
+	private Button flipButton;
 
 	private float fingerStartTime  = 0.0f;
 	private Vector2 fingerStartPos = Vector2.zero;
@@ -16,12 +20,27 @@ public class InputReader : MonoBehaviour {
 
 	void Awake(){
 		isPlayed = false;
+		inputStrings.Clear ();
 	}
+
+	void Start(){
+		undoButton = GameObject.Find ("UndoButton").GetComponent<Button> ();
+		flipButton = GameObject.Find ("FlipButton").GetComponent<Button> ();
+		undoButton.onClick.AddListener (() => {
+			recordInputsHelper("Delete");
+		});
+		flipButton.onClick.AddListener (() => {
+			recordInputsHelper("Space");
+		});
+	}
+
+	
 
 	void Update(){
 		recordInputs ();												//Record any keystrokes entered by the user into the inputHistory array
 		recordButtons ();
 	}
+
 
 	void recordInputs(){
 		if (isPlayed == false) {										//If user has not entered the return key
@@ -95,9 +114,9 @@ public class InputReader : MonoBehaviour {
 		}
 	}
 
-	void recordInputsHelper(string direction){
+	public void recordInputsHelper(string direction){
 		inputStrings.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
-		if(direction == "D"){
+		if(direction == "Delete"){
 				GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
 				Destroy(a[a.Length -1]);
 				inputStrings.RemoveAt(inputStrings.Count-1);
@@ -108,7 +127,7 @@ public class InputReader : MonoBehaviour {
 	private bool isWheelClicked = false;
 	private bool isRunClicked = false;
 	private bool isUndoClicked = false;
-	void OnGUI() {
+	/*void OnGUI() {
 		float height = Screen.height;
 		float width = Screen.width;
 		float UndoWidth = width - Screen.width * 0.9f;
@@ -125,7 +144,7 @@ public class InputReader : MonoBehaviour {
 		} else if (GUI.Button (new Rect (RunWidth, RunHeight, ButtonSize, ButtonSize), "Run")) {
 			isRunClicked = true;
 		}
-	}
+	}*/
 
 	
 	void recordButtons() {
