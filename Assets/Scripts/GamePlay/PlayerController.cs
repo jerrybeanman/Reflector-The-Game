@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour {
 	public bool isStranded = false;
 	AudioSource PlayerDeath;
 	AudioSource LevelCompleteSound;
-	public ButtonManager buttonManager;
 	public bool failedOnce = false;
 	
 	private int temp;											

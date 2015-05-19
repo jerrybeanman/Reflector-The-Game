@@ -12,17 +12,19 @@ public class ButtonManager : MonoBehaviour {
 	void Start() { 
 		MyButton.onClick.AddListener (() => { 
 			staticDifficulty = difficulty;
-			LoadLevel ();
+			LoadLevel (difficulty);
 		});
 	}
 	
-	void LoadLevel(){
-		if (difficulty.Equals ("1")) {
+	public static void LoadLevel(string diff){
+		if (staticDifficulty.Equals ("1")) {
 			maps = RandomLevelGenerator.linearMapPool();
-			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+			AutoFade.LoadLevel ("D" + diff + "L" + maps [0], 1, 3, Color.gray);
 		} else {
-			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficulty + "-map"));
-			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + diff + "-map"));
+			print("Level to load " + "D" + diff + "L" + maps [0]);
+			AutoFade.LoadLevel ("D" + diff + "L" + maps [0], 1, 3, Color.gray);
+			print("Level to load " + "D" + diff + "L" + maps [0]);
 		}
 	}
 
