@@ -55,10 +55,7 @@ public class PlayerController : MonoBehaviour {
 			InputReader.isPlayed = true;
 			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
 		}
-
-		/*if (InGameGui.second == 0) {
-			LoadNextLevelFail();
-		}*/
+		
 
 	}
 
