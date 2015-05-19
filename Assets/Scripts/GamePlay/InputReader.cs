@@ -38,7 +38,6 @@ public class InputReader : MonoBehaviour {
 
 	void Update(){
 		recordInputs ();												//Record any keystrokes entered by the user into the inputHistory array
-		recordButtons ();
 	}
 
 
@@ -117,47 +116,10 @@ public class InputReader : MonoBehaviour {
 	public void recordInputsHelper(string direction){
 		inputStrings.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
 		if(direction == "Delete"){
-				GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
-				Destroy(a[a.Length -1]);
-				inputStrings.RemoveAt(inputStrings.Count-1);
+			GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
+			Destroy(a[a.Length -1]);
+			inputStrings.RemoveAt(inputStrings.Count-1);
+			inputStrings.RemoveAt(inputStrings.Count-1);
 		}
-	}
-
-
-	private bool isWheelClicked = false;
-	private bool isRunClicked = false;
-	private bool isUndoClicked = false;
-	/*void OnGUI() {
-		float height = Screen.height;
-		float width = Screen.width;
-		float UndoWidth = width - Screen.width * 0.9f;
-		float UndoHeight = height - Screen.height * 0.2f;
-		float FlipWidth = width - Screen.width * 0.6f;
-		float FlipHeight = height - Screen.height * 0.2f;
-		float RunWidth = width - Screen.width * 0.3f;
-		float RunHeight = height - Screen.height * 0.2f;
-		float ButtonSize = width * 0.2f;
-		if (GUI.Button (new Rect (UndoWidth, UndoHeight, ButtonSize, ButtonSize), "Undo")) {
-			isUndoClicked = true;
-		} else if (GUI.Button (new Rect (FlipWidth, FlipHeight, ButtonSize, ButtonSize), "Flip!")) {	
-			isWheelClicked = true;
-		} else if (GUI.Button (new Rect (RunWidth, RunHeight, ButtonSize, ButtonSize), "Run")) {
-			isRunClicked = true;
-		}
-	}*/
-
-	
-	void recordButtons() {
-		if (isWheelClicked) {    
-			recordInputsHelper ("Space");
-			isWheelClicked = false;
-		} else if (isRunClicked && isPlayed == false) {
-			isPlayed = true;
-			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
-			isRunClicked = false;
-		} else if (isUndoClicked) {
-			recordInputsHelper("Delete");
-			isUndoClicked = false;
-		}
-	}
+	}	
 }

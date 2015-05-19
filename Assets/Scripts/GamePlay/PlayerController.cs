@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 			if(failedOnce) {
 				break;
 			}
-			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){								//If player is on wheel, pressed space bar, and wheel has not been flipped
+			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){						//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
 				wheel.flip ();																	//Flip all obstacles
 			}else{
@@ -110,6 +110,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator setArrowAnimation(int j){
+		print (j);
+		print (arrows.Length);
 		arrows [j - 1].SetMove ();
 		yield return new WaitForSeconds (0.75f);
 		controller.transform.rotation = Quaternion.LookRotation (direction, Vector3.up);
