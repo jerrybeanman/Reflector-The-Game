@@ -5,8 +5,9 @@ using System.Linq;
 public class RandomLevelGenerator : MonoBehaviour {
 
 	private static readonly int LEVELSPERGAME = 4;
+	private static readonly int LEVELSINTUTORIAL = 8;
 
-	public static int[] mapPool(int filesOfDifficulty) {
+	public static int[] randomMapPool(int filesOfDifficulty) {
 		int[] numberContainer = new int[LEVELSPERGAME];
 		int count = 0;
 		while (count < LEVELSPERGAME) {
@@ -29,5 +30,13 @@ public class RandomLevelGenerator : MonoBehaviour {
 			counter++;
 		} while(text != null);
 		return (counter -1);
+	}
+
+	public static int[] linearMapPool() {
+		int[] numberContainer = new int[LEVELSINTUTORIAL];
+		for (int i = 0; i < LEVELSINTUTORIAL; i++) {
+			numberContainer[i] = (i + 1);
+		}
+		return numberContainer;
 	}
 }

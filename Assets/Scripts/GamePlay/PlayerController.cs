@@ -13,10 +13,12 @@ public class PlayerController : MonoBehaviour {
 	public static bool collided;								//Check if player has collided with an obstacle or wall
 	public static bool stranded;								//If the player is stranded, the level will fail
 	public static bool levelComplete;
+	public bool isStranded = false;
 	AudioSource PlayerDeath;
 	AudioSource LevelCompleteSound;
 	public ButtonManager buttonManager;
-
+	public bool failedOnce = false;
+	
 	private int temp;											
 	public static int level = 0;								//Current level of tier the player object is on
 
@@ -48,8 +50,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		});
 	}
-	
-	
+		
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.Return) && InputReader.isPlayed == false) {	//If user presses the return key and only pressed once
 			InputReader.isPlayed = true;
@@ -57,16 +58,14 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	
-
-
-
 	public IEnumerator RelayedInput(){
 		int i, j;
 		stranded = false;
 		arrows = FindObjectsOfType (typeof(ArrowManager)) as ArrowManager[];					//Find all GameObjects with the ArrowManager script attached
 		for (i = 0, j = inputs.inputStrings.Count; i < inputs.inputStrings.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
-
+			if(failedOnce) {
+				break;
+			}
 			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){								//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
 				wheel.flip ();																	//Flip all obstacles
@@ -78,20 +77,24 @@ public class PlayerController : MonoBehaviour {
 		}
 		//If the play gets stranded, i.e doesn't complete the level or fail
 		//Moves on to the next level and player scores 0
-		if(levelComplete == false && i == (inputs.inputStrings.Count) ) {
+		if(levelComplete == false && i == (inputs.inputStrings.Count) || levelComplete == false && !failedOnce) {
 			stranded = true;
+			failedOnce = true;
+			print("Stranded fail");
 			StartCoroutine(LoadNextLevelFail());
 		}
 	}
-	
+
 	void Move(int j){
 		RaycastHit hit;															
 		Ray landingRay = new Ray (curPos, direction);
 		if (Physics.Raycast (landingRay, out hit, 1)) {								//If player has detect a collidable object towards the moving direction
 			if (hit.collider.tag == "Obstacle" || hit.collider.tag == "Wall") {		//If the object is an Obstacle or a wall
-				collided = true;					
+				collided = true;
+				failedOnce = true;
 				newPos = curPos;													//Don't move
 				MoveHelper (j, collided); 
+				print("Move fail");
 				StartCoroutine(LoadNextLevelFail());
 			} else
 				MoveHelper (j, false);
@@ -130,8 +133,6 @@ public class PlayerController : MonoBehaviour {
 		newPos += position;
 		direction = position;
 	}
-
-
 	
 	IEnumerator LoadNextLevel(AudioSource sound) {
 		LevelCompleteSound.Play();
@@ -139,23 +140,20 @@ public class PlayerController : MonoBehaviour {
 		nextLevel ();
 	}
 
+	// BUG Sometimes this plays twice or more per one fail. If the 'fail sound' happens twice, that is a sign.
 	IEnumerator LoadNextLevelFail() {
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;
 		level++;
-		yield return new WaitForSeconds(1.5f);
-		nextLevel();
+		yield return new WaitForSeconds (1.5f);
+		nextLevel ();
 	}
 	//note to reader: sorry in advance. Read with caution
 	void nextLevel() {
-		//int[] maps = but
 		int lev = Int32.Parse(ButtonManager.staticDifficulty);
 		//For the tutorial, we want the levels to play in sequence
 		if (lev == 1 && level != 8) {
-			AutoFade.LoadLevel ("D" + buttonManager.getDifficulty() + "L" + (level + 1), .75f, .75f, Color.black);
-		//} else if (level != LevelReader.maps.Length && lev != 1) {
-		//		AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + LevelReader.maps[level], .75f, .75f, Color.black);
-		//}
+			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps[level], .75f, .75f, Color.black);
 		} else if (level != ButtonManager.maps.Length && lev != 1) {
 			AutoFade.LoadLevel("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps[level], .75f, .75f, Color.black);
 		}
@@ -165,7 +163,6 @@ public class PlayerController : MonoBehaviour {
 		if (hit.gameObject.tag == "End" && temp == level) {
 			GameOverManager.levelsPlayed++;
 			level++;
-
 			levelComplete = true;
 			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}

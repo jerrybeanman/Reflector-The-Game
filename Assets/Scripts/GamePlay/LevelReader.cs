@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -11,15 +11,10 @@ public class LevelReader : MonoBehaviour {
 	public static string[][] Level;
 	public static string Difficulty;
 	public static string Map;
-	private readonly int LEVELSPERGAME = 4;
 	public static int[] maps;
-	public string[] currentSceneName;
 	
 	// Use this for initialization
 	void Awake () {
-		/*currentSceneName = Regex.Split(Application.loadedLevelName, @"/D+");
-		Difficulty = currentSceneName [1];
-		Map = currentSceneName[2];*/
 		Difficulty = ButtonManager.staticDifficulty;		
 		Map = ButtonManager.maps [PlayerController.level].ToString();
 		string fileName =  "difficulty" + Difficulty + "-map" + Map;
