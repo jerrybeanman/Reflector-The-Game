@@ -15,8 +15,11 @@ public class LevelReader : MonoBehaviour {
 	
 	// Use this for initialization
 	void Awake () {
-		Difficulty = ButtonManager.staticDifficulty;		
-		Map = ButtonManager.maps [PlayerController.level].ToString();
+		string[] currentSceneName = Regex.Split(Application.loadedLevelName, @"\D+");
+		Difficulty = currentSceneName [1];
+		Map = currentSceneName [2];
+		/*Difficulty = ButtonManager.staticDifficulty;		
+		Map = ButtonManager.maps [PlayerController.level].ToString();*/
 		string fileName =  "difficulty" + Difficulty + "-map" + Map;
 		TextAsset text = (TextAsset)Resources.Load (fileName, typeof(TextAsset));				//Load the file from the Resources folder
 
