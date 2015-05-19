@@ -4,7 +4,7 @@ using System.Linq;
 
 public class RandomLevelGenerator : MonoBehaviour {
 
-	private static readonly int LEVELSPERGAME = 1;
+	private static readonly int LEVELSPERGAME = 2;
 	private static readonly int LEVELSINTUTORIAL = 8;
 
 	public static int[] randomMapPool(int filesOfDifficulty) {

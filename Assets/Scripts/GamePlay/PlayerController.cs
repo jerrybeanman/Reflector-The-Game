@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour {
 			InputReader.isPlayed = true;
 			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
 		}
+
+		/*if (InGameGui.second == 0) {
+			LoadNextLevelFail();
+		}*/
+
 	}
 
 	public IEnumerator RelayedInput(){
@@ -62,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 		stranded = false;
 		arrows = FindObjectsOfType (typeof(ArrowManager)) as ArrowManager[];					//Find all GameObjects with the ArrowManager script attached
 		for (i = 0, j = inputs.inputStrings.Count; i < inputs.inputStrings.Count && j > 0; i++, j--) {	//Traverse the inputHistory back and forth at the same time
-			if(failedOnce) {
+			if(failedOnce || levelComplete) {
 				break;
 			}
 			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){						//If player is on wheel, pressed space bar, and wheel has not been flipped
@@ -76,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		//If the play gets stranded, i.e doesn't complete the level or fail
 		//Moves on to the next level and player scores 0
-		if(levelComplete == false && i == (inputs.inputStrings.Count) || levelComplete == false && !failedOnce) {
+		if(levelComplete == false && i == (inputs.inputStrings.Count) && failedOnce == false){ //|| (levelComplete == false && failedOnce == false)) {
 			stranded = true;
 			failedOnce = true;
 			print("Stranded fail");
@@ -109,8 +114,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator setArrowAnimation(int j){
-		print (j);
-		print (arrows.Length);
+		//print (j);
+		//print (arrows.Length);
 		arrows [j - 1].SetMove ();
 		yield return new WaitForSeconds (0.75f);
 		controller.transform.rotation = Quaternion.LookRotation (direction, Vector3.up);
