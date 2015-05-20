@@ -16,15 +16,20 @@ public class GameOverManager : MonoBehaviour
 	private bool addOnce = false;
 	void Update ()
 	{
-		if(PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded)
-			setAnim("LF");
-		if (PlayerController.levelComplete) 
-			setAnim ("LC");
+		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
+			setAnim ("TC");	}
+		if (PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) {
+			setAnim ("LF"); }
+		if (PlayerController.levelComplete) {
+			setAnim ("LC"); }
 		if (PlayerController.levelComplete && levelsPlayed == ButtonManager.maps.Length) {// && !ButtonManager.staticDifficulty.Equals("1")) {
 			setAnim ("LC");	setAnim ("TC");	}
+<<<<<<< HEAD
 		print (PlayerController.stranded);
 		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
 			setAnim ("LF");	setAnim ("TC");	}
+=======
+>>>>>>> bb24f8223722ef620c4f08ceefba07ea2d0ca7fc
 	}
 	
 	void setAnim(string trigger){
