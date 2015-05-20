@@ -23,18 +23,11 @@ public class InGameGui : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		second = (int)startTime;
 		Timer.text = second + "s";	//Display timer on canvas
 		if (InputReader.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
 			startTime -= Time.deltaTime;
 
-
-		if (second == 0 && happenOnce ==false) {
-			happenOnce = true;
-			print(PlayerController.level + 1);
-			string test = "D" + ButtonManager.staticDifficulty + "L" + (ButtonManager.maps[++PlayerController.level]);
-			AutoFade.LoadLevel (test, .75f, .75f, Color.black);
-		}
 	}
 }

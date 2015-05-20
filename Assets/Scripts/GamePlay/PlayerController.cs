@@ -49,14 +49,18 @@ public class PlayerController : MonoBehaviour {
 			}
 		});
 	}
-		
+
+	private bool happenOnce = false;
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.Return) && InputReader.isPlayed == false) {	//If user presses the return key and only pressed once
 			InputReader.isPlayed = true;
 			StartCoroutine ("RelayedInput");							//Move the player according to the user inputs
 		}
 		
-
+		if (InGameGui.second == 0 && happenOnce ==false) {
+			happenOnce = true;
+			StartCoroutine(LoadNextLevelFail());
+		}
 	}
 
 	public IEnumerator RelayedInput(){
@@ -81,7 +85,6 @@ public class PlayerController : MonoBehaviour {
 		if(levelComplete == false && i == (inputs.inputStrings.Count) && failedOnce == false){ //|| (levelComplete == false && failedOnce == false)) {
 			stranded = true;
 			failedOnce = true;
-			print("Stranded fail");
 			StartCoroutine(LoadNextLevelFail());
 		}
 	}
@@ -95,7 +98,6 @@ public class PlayerController : MonoBehaviour {
 				failedOnce = true;
 				newPos = curPos;													//Don't move
 				MoveHelper (j, collided); 
-				print("Move fail");
 				StartCoroutine(LoadNextLevelFail());
 			} else
 				MoveHelper (j, false);
@@ -153,13 +155,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	//note to reader: sorry in advance. Read with caution
 	void nextLevel() {
-		int lev = Int32.Parse(ButtonManager.staticDifficulty);
 		//For the tutorial, we want the levels to play in sequence
-		if (lev == 1 && level != 8) {
-			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps[level], .75f, .75f, Color.black);
-		} else if (level != ButtonManager.maps.Length && lev != 1) {
+		if(level < ButtonManager.maps.Length) 
+			print (level);
 			AutoFade.LoadLevel("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps[level], .75f, .75f, Color.black);
-		}
 	}
 	
 	void OnTriggerEnter(Collider hit){
