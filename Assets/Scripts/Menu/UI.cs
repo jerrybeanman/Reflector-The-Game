@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms;
 
 public class UI : MonoBehaviour {
 
-	AudioSource sound;
+	/*AudioSource sound;
 
 	void Awake() {
 		sound = GetComponent<AudioSource>();
@@ -75,5 +75,5 @@ public class UI : MonoBehaviour {
 				}
 			});
 		}
-	}
+	}*/
 }
