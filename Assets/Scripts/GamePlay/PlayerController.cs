@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){						//If player is on wheel, pressed space bar, and wheel has not been flipped
 				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
-				yield return StartCoroutine(wheel.flip ());																	//Flip all obstacles
+				yield return StartCoroutine(wheel.flip ());
 			}else{
 				getDirection(inputs.inputStrings[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour {
 		//Moves on to the next level and player scores 0
 		if(levelComplete == false && i == (inputs.inputStrings.Count) && failedOnce == false){ //|| (levelComplete == false && failedOnce == false)) {
 			stranded = true;
-			print(stranded);
 			failedOnce = true;
 			StartCoroutine(LoadNextLevelFail());
 		}
@@ -158,6 +157,7 @@ public class PlayerController : MonoBehaviour {
 	void nextLevel() {
 		//For the tutorial, we want the levels to play in sequence
 		if(level < ButtonManager.maps.Length) 
+			print (level);
 			AutoFade.LoadLevel("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps[level], .75f, .75f, Color.black);
 	}
 	
