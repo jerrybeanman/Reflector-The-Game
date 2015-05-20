@@ -16,29 +16,34 @@ public class GameOverManager : MonoBehaviour
 	private bool addOnce = false;
 	void Update ()
 	{
-		if(PlayerController.collided == true || InGameGui.second == 0 || PlayerController.stranded == true)
-		{
+		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
+			setAnim ("TC");	}
+		if (PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) {
+			setAnim ("LF"); }
+		if (PlayerController.levelComplete) {
+			setAnim ("LC"); }
+		if (PlayerController.levelComplete && levelsPlayed == ButtonManager.maps.Length) {// && !ButtonManager.staticDifficulty.Equals("1")) {
+			setAnim ("LC");	setAnim ("TC");	}
+	}
+	
+	void setAnim(string trigger){
+		switch (trigger) {
+		case "LF" :
 			anim.SetTrigger ("Level Failed");
 			score += 0;
 			PlayerController.setStrandedFalse();
-		}
-		if (PlayerController.levelComplete == true) {
+			break;
+		case "LC" : 
 			anim.SetTrigger("Level Complete");
 			if(addOnce == false){
 				score += InGameGui.second * 10;
 				addOnce = true;
 			}
-		}
-		if (PlayerController.levelComplete == true && levelsPlayed == ButtonManager.maps.Length && !ButtonManager.staticDifficulty.Equals("1")) {
-			print ("game over");
+			break;
+		case "TC" : 
 			anim.SetTrigger("Tier Complete");
 			levelsPlayed = 0;
-		}
-
-		if (levelsPlayed == 8 && ButtonManager.staticDifficulty.Equals ("1")) {
-			print ("Tutorial Over");
-			anim.SetTrigger("Tier Complete");
-			levelsPlayed = 0;
+			break;
 		}
 	}
 }

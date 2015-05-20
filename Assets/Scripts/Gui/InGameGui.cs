@@ -11,6 +11,7 @@ public class InGameGui : MonoBehaviour {
 	public Text level;				//Current tier and level the user is on
 	public float startTime;	//The starting count down time
 	public static int second;				//the unit is in seconds
+	private bool happenOnce = false;
 
 
 	void Awake(){
@@ -18,27 +19,15 @@ public class InGameGui : MonoBehaviour {
 		second = (int)startTime;
 		score.text = GameOverManager.score.ToString();
 		totalScore.text = "Score: " + score.text;
-		if (lev == 1) {
-			level.text = LevelReader.Difficulty + "." + (PlayerController.level + 1); 
-		} else
-			level.text = LevelReader.Difficulty + "." + ButtonManager.maps[PlayerController.level];
+		level.text = LevelReader.Difficulty + "." + ButtonManager.maps[PlayerController.level];
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		second = (int)startTime;
 		Timer.text = second + "s";	//Display timer on canvas
 		if (InputReader.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
 			startTime -= Time.deltaTime;
-		if (second == 0) {
-			int lev = Int32.Parse(LevelReader.Difficulty);
-			//For the tutorial, we want the levels to play in sequence
-			if (lev == 1) {
-				AutoFade.LoadLevel ("D" + LevelReader.Difficulty + "L" + (PlayerController.level + 1), .75f, .75f, Color.black);
-			} else {
-				if(PlayerController.level != ButtonManager.maps.Length)
-					AutoFade.LoadLevel("D" + LevelReader.Difficulty + "L" + ButtonManager.maps[PlayerController.level], .75f, .75f, Color.black);
-			}
-		}
+
 	}
 }

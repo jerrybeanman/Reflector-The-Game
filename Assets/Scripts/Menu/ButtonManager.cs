@@ -16,13 +16,15 @@ public class ButtonManager : MonoBehaviour {
 		});
 	}
 	
-	void LoadLevel(){
-		if (difficulty.Equals ("1")) {
+	public static void LoadLevel(){
+		if (staticDifficulty.Equals ("1")) {
 			maps = RandomLevelGenerator.linearMapPool();
-			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+			AutoFade.LoadLevel ("D" + staticDifficulty + "L" + maps [0], 1f, 3f, Color.gray);
 		} else {
-			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficulty + "-map"));
-			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + staticDifficulty + "-map"));
+			//print("Level to load " + "D" + diff + "L" + maps [0]);
+			AutoFade.LoadLevel ("D" + staticDifficulty + "L" + maps [0], 1f, 3f, Color.gray);
+			//print("Level to load " + "D" + diff + "L" + maps [0]);
 		}
 	}
 
