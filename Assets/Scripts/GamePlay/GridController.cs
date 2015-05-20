@@ -49,6 +49,7 @@ public class GridController : MonoBehaviour {
 		// spawn the boundary
 		spawnBoundary();
 	}
+	
 
 	// Spawns the level when called
 	void spawnLevel(){
@@ -77,16 +78,16 @@ public class GridController : MonoBehaviour {
 					Instantiate(floor, new Vector3(x, floor_height , -z), Quaternion.identity);
 					break;
 				case sEnd:
-					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.identity);
+					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.Euler(90,0,0));
 					Instantiate(floor, new Vector3(x, floor_height , -z), Quaternion.identity);
 					break;
 				case sWheel:
-					Instantiate(wheel, new Vector3(x, object_height, -z), Quaternion.identity);
+					Instantiate(wheel, new Vector3(x, 0.2f, -z), Quaternion.identity);
 					Instantiate(floor, new Vector3(x, floor_height , -z), Quaternion.identity);
 					break;
 				case sObstacleAndEnd:
 					Instantiate(obstacle, new Vector3(x, object_height, -z), Quaternion.identity);
-					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.identity);
+					Instantiate(end, new Vector3(x, object_height, -z), Quaternion.Euler(90,0,0));
 					Instantiate(floor, new Vector3(x, floor_height, -z), Quaternion.identity);
 					break;
 				}
@@ -142,7 +143,12 @@ public class GridController : MonoBehaviour {
 		
 	// Returns the center of the map
 	public Vector3 getCenter(){
-		return new Vector3 (width / 2f - .5f, (width + height)*1.3f, -height / 2f + .5f);
+		float cameraZoom = 1.3f;
+		float mapSize = (width + height);
+		if (mapSize >= 7) {
+			cameraZoom = 1.1f;
+		}
+		return new Vector3 (width / 2f - .5f, mapSize * cameraZoom, -height / 2f + .5f);
 	}
 
 }

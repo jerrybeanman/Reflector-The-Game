@@ -63,7 +63,6 @@ public class Highscores : MonoBehaviour {
 			string username = entryInfo[0];
 			int score = int.Parse(entryInfo[1]);
 			highscoreList[i] = new Highscore(username, score);
-			print(highscoreList[i].username + ": " + highscoreList[i].score);
 		}
 	}
 }

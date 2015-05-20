@@ -7,11 +7,13 @@ public class WheelController : MonoBehaviour {
 	public static bool collided = false;
 	public bool isFlip = false;
 
-
-
 	// Happens when a trigger gets activated
 	// If the player activates the trigger, set collided to true (player is on the 'wheel')
 	void OnTriggerEnter(Collider hit) {
+		AudioSource audio = GetComponent<AudioSource>();
+		Animator anim = GetComponent<Animator> ();
+		audio.Play ();
+		anim.SetTrigger("Flip");
 		if (hit.gameObject.tag == "Player" && isFlip == false) {
 			isFlip = true;
 			collided = true;
@@ -40,8 +42,6 @@ public class WheelController : MonoBehaviour {
 
 	// Flips obstacles over the map axis
 	public void flip(){
-		AudioSource audio = GetComponent<AudioSource>();
-		audio.Play ();
 		// New vector3 to move to
 		Vector3 newPos;
 		// Holds all obstacles on the current map

@@ -5,21 +5,37 @@ using System.Collections;
 
 public class ButtonManager : MonoBehaviour {
 	public string difficulty;
-	public string level;
+	public static string staticDifficulty;
+	public static int[] maps;
 	[SerializeField] private Button MyButton = null; // assign in the editor
 	
 	void Start() { 
-		if (difficulty.Equals ("0")) {
-			Application.Quit ();
-		} else {
-			MyButton.onClick.AddListener (() => { 
-				LoadLevel ();
-			});
-		}
+		MyButton.onClick.AddListener (() => { 
+			staticDifficulty = difficulty;
+			LoadLevel ();
+		});
 	}
 	
 	void LoadLevel(){
-			AutoFade.LoadLevel("D" + difficulty + "L" + level, 1,3, Color.gray);
+		if (difficulty.Equals ("1")) {
+			maps = RandomLevelGenerator.linearMapPool();
+			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
+		} else {
+			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficulty + "-map"));
+			AutoFade.LoadLevel ("D" + difficulty + "L" + maps [0], 1, 3, Color.gray);
 		}
+	}
+
+	public int getMapsLength() {
+		return maps.Length;
+	}
+
+	public string getDifficulty () {
+		return difficulty;
+	}
+
+	public int[] getMaps() {
+		return maps;
+	}
 }
 
