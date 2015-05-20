@@ -34,7 +34,6 @@ public class RandomLevelGenerator : MonoBehaviour {
 	}
 
 	public static int[] linearMapPool() {
-		print ("are we here");
 		int[] numberContainer = new int[LEVELSINTUTORIAL];
 		for (int i = 0; i < LEVELSINTUTORIAL; i++) {
 			numberContainer[i] = (i + 1);

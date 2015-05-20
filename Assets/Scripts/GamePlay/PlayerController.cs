@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public static bool collided;								//Check if player has collided with an obstacle or wall
 	public static bool stranded;								//If the player is stranded, the level will fail
 	public static bool levelComplete;
-	public bool isStranded = false;
+	//public bool isStranded = false;
 	AudioSource PlayerDeath;
 	AudioSource LevelCompleteSound;
 	public bool failedOnce = false;
@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour {
 		//Moves on to the next level and player scores 0
 		if(levelComplete == false && i == (inputs.inputStrings.Count) && failedOnce == false){ //|| (levelComplete == false && failedOnce == false)) {
 			stranded = true;
+			print(stranded);
 			failedOnce = true;
 			StartCoroutine(LoadNextLevelFail());
 		}

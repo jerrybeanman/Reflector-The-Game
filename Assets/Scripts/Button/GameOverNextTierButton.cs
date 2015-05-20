@@ -26,7 +26,6 @@ public class GameOverNextTierButton : MonoBehaviour {
 		LevelReader.Difficulty = difficultyInt.ToString();
 		ButtonManager.staticDifficulty = difficultyInt.ToString ();
 
-
 		AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
 	}
 

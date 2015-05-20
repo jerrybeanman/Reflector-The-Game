@@ -22,6 +22,7 @@ public class GameOverManager : MonoBehaviour
 			setAnim ("LC");
 		if (PlayerController.levelComplete && levelsPlayed == ButtonManager.maps.Length) {// && !ButtonManager.staticDifficulty.Equals("1")) {
 			setAnim ("LC");	setAnim ("TC");	}
+		print (PlayerController.stranded);
 		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
 			setAnim ("LF");	setAnim ("TC");	}
 	}
