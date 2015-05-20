@@ -18,17 +18,16 @@ public class GameOverNextTierButton : MonoBehaviour {
 	}
 	
 	void Loadlevel(){
-		//PlayerController.level = 0;
+		PlayerController.level = 0;
 		int difficultyInt = Int32.Parse (difficulty);
 		difficultyInt++;
-		//maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficultyInt + "-map"));
-		//LevelReader.maps = maps;
-		//ButtonManager.maps = maps;
-		//LevelReader.Difficulty = difficultyInt.ToString();
+		maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficultyInt + "-map"));
+		ButtonManager.maps = maps;
+		LevelReader.Difficulty = difficultyInt.ToString();
+		ButtonManager.staticDifficulty = difficultyInt.ToString ();
 
-		//ButtonManager.LoadLevel (difficultyInt.ToString ());
 
-		//AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
+		AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
 	}
 
 	void ResetVariables () {

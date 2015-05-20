@@ -8,6 +8,7 @@ public class RandomLevelGenerator : MonoBehaviour {
 	private static readonly int LEVELSINTUTORIAL = 8;
 
 	public static int[] randomMapPool(int filesOfDifficulty) {
+		print ("random map pool");
 		int[] numberContainer = new int[LEVELSPERGAME];
 		int count = 0;
 		while (count < LEVELSPERGAME) {
@@ -33,6 +34,7 @@ public class RandomLevelGenerator : MonoBehaviour {
 	}
 
 	public static int[] linearMapPool() {
+		print ("are we here");
 		int[] numberContainer = new int[LEVELSINTUTORIAL];
 		for (int i = 0; i < LEVELSINTUTORIAL; i++) {
 			numberContainer[i] = (i + 1);
