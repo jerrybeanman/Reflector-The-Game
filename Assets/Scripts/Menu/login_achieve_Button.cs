@@ -16,15 +16,15 @@ public class login_achieve_Button : MonoBehaviour {
 			}
 			
 			void Start() { 
-					login.onClick.AddListener(() => { 
-						print("anyhin");
+				login.onClick.AddListener(() => { 
+					print("anyhin");
 					Social.localUser.Authenticate((bool success) => {
-						// handle success or failure
-						if (success) {
-							Debug.Log("success");
-						} else {
-							Debug.Log("failed");
-						}
+					// handle success or failure
+					if (success) {
+						Debug.Log("success");
+					} else {
+						Debug.Log("failed");
+					}
 					});
 				});
 
