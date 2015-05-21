@@ -18,6 +18,7 @@ public class GameOverNextTierButton : MonoBehaviour {
 	}
 	
 	void Loadlevel(){
+		GameOverManager.score = 0;
 		PlayerController.level = 0;
 		int difficultyInt = Int32.Parse (difficulty);
 		difficultyInt++;

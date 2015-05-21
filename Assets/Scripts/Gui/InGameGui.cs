@@ -19,7 +19,7 @@ public class InGameGui : MonoBehaviour {
 		second = (int)startTime;
 		score.text = GameOverManager.score.ToString();
 		totalScore.text = "Score: " + score.text;
-		level.text = LevelReader.Difficulty + "." + ButtonManager.maps[PlayerController.level];
+		level.text = (PlayerController.level+1).ToString();
 	}
 	
 	// Update is called once per frame
@@ -28,6 +28,6 @@ public class InGameGui : MonoBehaviour {
 		Timer.text = second + "s";	//Display timer on canvas
 		if (InputReader.isPlayed == false && second != 0 )			//Decrement second as long as the timer hasn't reached zero
 			startTime -= Time.deltaTime;
-
+		totalScore.text = "Score: " + GameOverManager.score.ToString ();
 	}
 }

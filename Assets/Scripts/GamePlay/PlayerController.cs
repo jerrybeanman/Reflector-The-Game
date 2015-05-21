@@ -156,9 +156,10 @@ public class PlayerController : MonoBehaviour {
 	//note to reader: sorry in advance. Read with caution
 	void nextLevel() {
 		//For the tutorial, we want the levels to play in sequence
-		if(level < ButtonManager.maps.Length) 
+		if (level < ButtonManager.maps.Length) { 
 			print (level);
-			AutoFade.LoadLevel("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps[level], .75f, .75f, Color.black);
+			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .75f, .75f, Color.black);
+		}
 	}
 	
 	void OnTriggerEnter(Collider hit){

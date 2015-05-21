@@ -37,6 +37,7 @@ public class GameOverManager : MonoBehaviour
 			anim.SetTrigger("Level Complete");
 			if(addOnce == false){
 				score += InGameGui.second * 10;
+				timer.score.text = score.ToString();
 				addOnce = true;
 			}
 			break;
