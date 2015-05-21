@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour {
 	public static bool collided;								//Check if player has collided with an obstacle or wall
 	public static bool stranded;								//If the player is stranded, the level will fail
 	public static bool levelComplete;
-	//public bool isStranded = false;
 	AudioSource PlayerDeath;
 	AudioSource LevelCompleteSound;
 	public bool failedOnce = false;
@@ -155,9 +154,9 @@ public class PlayerController : MonoBehaviour {
 	}
 	//note to reader: sorry in advance. Read with caution
 	void nextLevel() {
+		int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
 		//For the tutorial, we want the levels to play in sequence
-		if (level < ButtonManager.maps.Length) { 
-			print (level);
+		if (level < ButtonManager.maps.Length || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) {
 			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .75f, .75f, Color.black);
 		}
 	}

@@ -17,14 +17,12 @@ public class ButtonManager : MonoBehaviour {
 	}
 	
 	public static void LoadLevel(){
-		if (staticDifficulty.Equals ("1")) {
-			maps = RandomLevelGenerator.linearMapPool();
+		if (staticDifficulty.Equals ("1") || staticDifficulty.Equals ("7") || staticDifficulty.Equals ("8")) {
+			maps = RandomLevelGenerator.linearMapPool("difficulty" + staticDifficulty + "-map");
 			AutoFade.LoadLevel ("D" + staticDifficulty + "L" + maps [0], 1f, 3f, Color.gray);
 		} else {
 			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + staticDifficulty + "-map"));
-			//print("Level to load " + "D" + diff + "L" + maps [0]);
 			AutoFade.LoadLevel ("D" + staticDifficulty + "L" + maps [0], 1f, 3f, Color.gray);
-			//print("Level to load " + "D" + diff + "L" + maps [0]);
 		}
 	}
 
