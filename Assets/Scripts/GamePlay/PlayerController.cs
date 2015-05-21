@@ -158,7 +158,6 @@ public class PlayerController : MonoBehaviour {
 		int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
 		//For the tutorial, we want the levels to play in sequence
 		if (level < ButtonManager.maps.Length || difficultyInt < RandomLevelGenerator.MAXLEVELS) {
-			print (level);
 			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .75f, .75f, Color.black);
 		}
 	}

@@ -9,7 +9,6 @@ public class RandomLevelGenerator : MonoBehaviour {
 	public static readonly int MAXLEVELS = 6;
 
 	public static int[] randomMapPool(int filesOfDifficulty) {
-		print ("random map pool");
 		int[] numberContainer = new int[LEVELSPERGAME];
 		int count = 0;
 		while (count < LEVELSPERGAME) {
@@ -25,18 +24,18 @@ public class RandomLevelGenerator : MonoBehaviour {
 	// 
 	public static int getNumberOfMaps (string fileName) {
 		TextAsset text;
-		
 		int counter = 0;
 		do {
 			text = (TextAsset)Resources.Load (fileName + (counter + 1), typeof(TextAsset));
 			counter++;
 		} while(text != null);
-		return (counter -1);
+		return (counter - 1);
 	}
 
-	public static int[] linearMapPool() {
-		int[] numberContainer = new int[LEVELSINTUTORIAL];
-		for (int i = 0; i < LEVELSINTUTORIAL; i++) {
+	public static int[] linearMapPool(string fileName) {
+		int numMaps = getNumberOfMaps (fileName);
+		int[] numberContainer = new int[numMaps];
+		for (int i = 0; i < numMaps; i++) {
 			numberContainer[i] = (i + 1);
 		}
 		return numberContainer;
