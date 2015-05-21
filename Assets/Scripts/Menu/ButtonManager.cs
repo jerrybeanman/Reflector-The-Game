@@ -11,13 +11,14 @@ public class ButtonManager : MonoBehaviour {
 	
 	void Start() { 
 		MyButton.onClick.AddListener (() => { 
+			print(difficulty);
 			staticDifficulty = difficulty;
 			LoadLevel ();
 		});
 	}
 	
 	public static void LoadLevel(){
-		if (staticDifficulty.Equals ("1")) {
+		if (staticDifficulty.Equals ("1") || staticDifficulty.Equals ("7") || staticDifficulty.Equals ("8")) {
 			maps = RandomLevelGenerator.linearMapPool();
 			AutoFade.LoadLevel ("D" + staticDifficulty + "L" + maps [0], 1f, 3f, Color.gray);
 		} else {

@@ -21,12 +21,16 @@ public class GameOverNextTierButton : MonoBehaviour {
 		PlayerController.level = 0;
 		int difficultyInt = Int32.Parse (difficulty);
 		difficultyInt++;
-		maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficultyInt + "-map"));
-		ButtonManager.maps = maps;
-		LevelReader.Difficulty = difficultyInt.ToString();
-		ButtonManager.staticDifficulty = difficultyInt.ToString ();
+		if (difficultyInt < RandomLevelGenerator.MAXLEVELS) {
+			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficultyInt + "-map"));
+			ButtonManager.maps = maps;
+			LevelReader.Difficulty = difficultyInt.ToString ();
+			ButtonManager.staticDifficulty = difficultyInt.ToString ();
 
-		AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
+			AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
+		} else {
+			print("difficulty is greater than 6");
+		}
 	}
 
 	void ResetVariables () {

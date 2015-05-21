@@ -19,6 +19,7 @@ public class GameOverManager : MonoBehaviour
 		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
 			setAnim ("TC");	}
 		if (PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) {
+			print(levelsPlayed + " " + ButtonManager.maps.Length);
 			setAnim ("LF"); }
 		if (PlayerController.levelComplete) {
 			setAnim ("LC"); }

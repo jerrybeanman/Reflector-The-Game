@@ -6,6 +6,7 @@ public class RandomLevelGenerator : MonoBehaviour {
 
 	private static readonly int LEVELSPERGAME = 2;
 	private static readonly int LEVELSINTUTORIAL = 8;
+	public static readonly int MAXLEVELS = 6;
 
 	public static int[] randomMapPool(int filesOfDifficulty) {
 		print ("random map pool");
