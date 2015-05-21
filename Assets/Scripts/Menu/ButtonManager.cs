@@ -17,7 +17,7 @@ public class ButtonManager : MonoBehaviour {
 	}
 	
 	public static void LoadLevel(){
-		if (staticDifficulty.Equals ("1") || staticDifficulty.Equals ("7") || staticDifficulty.Equals ("8")) {
+		if (staticDifficulty.Equals ("1") || staticDifficulty.Equals ("7") || staticDifficulty.Equals ("8") || staticDifficulty.Equals ("9")) {
 			maps = RandomLevelGenerator.linearMapPool("difficulty" + staticDifficulty + "-map");
 			AutoFade.LoadLevel ("D" + staticDifficulty + "L" + maps [0], 1f, 3f, Color.gray);
 		} else {
