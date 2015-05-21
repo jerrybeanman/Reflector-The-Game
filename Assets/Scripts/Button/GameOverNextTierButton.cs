@@ -18,6 +18,7 @@ public class GameOverNextTierButton : MonoBehaviour {
 	}
 	
 	void Loadlevel(){
+		GameOverManager.score = 0;
 		PlayerController.level = 0;
 		int difficultyInt = Int32.Parse (difficulty);
 		difficultyInt++;
@@ -25,11 +26,6 @@ public class GameOverNextTierButton : MonoBehaviour {
 		ButtonManager.maps = maps;
 		LevelReader.Difficulty = difficultyInt.ToString();
 		ButtonManager.staticDifficulty = difficultyInt.ToString ();
-
 		AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
-	}
-
-	void ResetVariables () {
-
 	}
 }

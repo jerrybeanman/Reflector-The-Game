@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
-//using GooglePlayGames;
+//added to initalize google play
+using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
+
 
 public class UI : MonoBehaviour {
 
 	AudioSource sound;
 
 	void Awake() {
-		sound = GetComponent<AudioSource>();	
-		//PlayGamesPlatform.Activate();	
+		sound = GetComponent<AudioSource>();
+		//initalize google play
+		//PlayGamesPlatform.Activate();
 	}
 	
 	public void DisableBoolInAnimator(Animator anim) {
@@ -23,16 +26,7 @@ public class UI : MonoBehaviour {
 	
 	public void NavigateTo(int scene) {
 		Application.LoadLevel (scene);
+
 	}
-
-/*
-			//login
-
-		}
-
-		if(GUILayout.Button("Achievement")) {
-			// show achievements UI
-			Social.ShowAchievementsUI();
-		}
-	}*/
+	
 }
