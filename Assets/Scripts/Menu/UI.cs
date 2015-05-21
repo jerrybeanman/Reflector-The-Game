@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+//added to initalize google play
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
+
 
 public class UI : MonoBehaviour {
 
@@ -7,6 +11,8 @@ public class UI : MonoBehaviour {
 
 	void Awake() {
 		sound = GetComponent<AudioSource>();
+		//initalize google play
+		//PlayGamesPlatform.Activate();
 	}
 	
 	public void DisableBoolInAnimator(Animator anim) {
@@ -22,4 +28,5 @@ public class UI : MonoBehaviour {
 		Application.LoadLevel (scene);
 
 	}
+	
 }

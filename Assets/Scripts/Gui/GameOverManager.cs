@@ -5,15 +5,16 @@ public class GameOverManager : MonoBehaviour
 	public InGameGui timer;
 	Animator anim;                          // Reference to the animator component.
 	public static int score = 0;
-
+	private bool addOnce = false;
 	public static int levelsPlayed = 0;
+	private bool tierComplete = false;
+
 	void Awake ()
 	{
 		// Set up the reference.
 		anim = GetComponent <Animator> ();
 	}
-	
-	private bool addOnce = false;
+
 	void Update ()
 	{
 		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
@@ -24,8 +25,13 @@ public class GameOverManager : MonoBehaviour
 			setAnim ("LC"); }
 		if (PlayerController.levelComplete && levelsPlayed == ButtonManager.maps.Length) {// && !ButtonManager.staticDifficulty.Equals("1")) {
 			setAnim ("LC");	setAnim ("TC");	}
+		if (ButtonManager.staticDifficulty.Equals ("1") && tierComplete) {
+			Social.ReportProgress("CgkIj8vavqsJEAIQAQ", 100.0f, (bool success) => {
+				// handle success or failure
+			});
+			tierComplete = false;
+		}
 	}
-	
 	void setAnim(string trigger){
 		switch (trigger) {
 		case "LF" :
@@ -37,11 +43,13 @@ public class GameOverManager : MonoBehaviour
 			anim.SetTrigger("Level Complete");
 			if(addOnce == false){
 				score += InGameGui.second * 10;
+				timer.score.text = score.ToString();
 				addOnce = true;
 			}
 			break;
 		case "TC" : 
 			anim.SetTrigger("Tier Complete");
+			tierComplete = true;
 			levelsPlayed = 0;
 			break;
 		}

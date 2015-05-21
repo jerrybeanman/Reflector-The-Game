@@ -18,11 +18,16 @@ public class GameOverNextTierButton : MonoBehaviour {
 	}
 	
 	void Loadlevel(){
+		GameOverManager.score = 0;
 		PlayerController.level = 0;
 		int difficultyInt = Int32.Parse (difficulty);
 		difficultyInt++;
-		if (difficultyInt < RandomLevelGenerator.MAXLEVELS || difficultyInt == 8) {
-			maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficultyInt + "-map"));
+		if (difficultyInt < RandomLevelGenerator.MAXLEVELS || difficultyInt == 8) {	// the '== 8' is so there is a transition from complexity 7 to 8
+			if(difficultyInt == 8) {	// this is for any complexity levels that need to play the next level sequence
+				maps = RandomLevelGenerator.linearMapPool("difficulty" + difficultyInt + "-map");
+			} else {
+				maps = RandomLevelGenerator.randomMapPool (RandomLevelGenerator.getNumberOfMaps ("difficulty" + difficultyInt + "-map"));
+			}
 			ButtonManager.maps = maps;
 			LevelReader.Difficulty = difficultyInt.ToString ();
 			ButtonManager.staticDifficulty = difficultyInt.ToString ();
@@ -31,9 +36,5 @@ public class GameOverNextTierButton : MonoBehaviour {
 		} else {
 			print("No more levels to play, go to main menu");
 		}
-	}
-
-	void ResetVariables () {
-
 	}
 }
