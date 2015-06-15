@@ -17,6 +17,10 @@ public class GameOverManager : MonoBehaviour
 
 	void Update ()
 	{
+		if ((PlayerController.collided || PlayerController.stranded || PlayerController.levelComplete) && levelsPlayed == ButtonManager.maps.Length && ButtonManager.staticDifficulty.Equals( "1")) {
+			AutoFade.LoadLevel("Rough", 1,3, Color.gray);
+			PlayerController.level = 0;
+			GameOverManager.score = 0;	}
 		if ((PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) && levelsPlayed == ButtonManager.maps.Length) {
 			setAnim ("TC");	}
 		if (PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) {
