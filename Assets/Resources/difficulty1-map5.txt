@@ -1,3 +1,2 @@
-b E
-f f
-S 1 2
+S f b
+1 f E 2
