@@ -47,7 +47,7 @@ public class GameOverManager : MonoBehaviour
 			break;
 		case "LC" : 
 			anim.SetTrigger("Level Complete");
-			if(addOnce == false && InGameGui.lev < 7){
+			if(addOnce == false && InGameGui.lev < 7 && InGameGui.lev != 1){
 				score += InGameGui.second * 10;
 				timer.score.text = score.ToString();
 				addOnce = true;

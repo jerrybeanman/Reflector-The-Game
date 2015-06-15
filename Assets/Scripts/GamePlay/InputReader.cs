@@ -24,7 +24,7 @@ public class InputReader : MonoBehaviour {
 	}
 
 	void Start(){
-		undoButton = GameObject.Find ("UndoButton").GetComponent<Button> ();
+		undoButton = GameObject.Find ("Undo").GetComponent<Button> ();
 		flipButton = GameObject.Find ("FlipButton").GetComponent<Button> ();
 		undoButton.onClick.AddListener (() => {
 			recordInputsHelper("Delete");

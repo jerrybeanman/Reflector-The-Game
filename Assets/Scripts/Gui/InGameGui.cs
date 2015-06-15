@@ -19,7 +19,7 @@ public class InGameGui : MonoBehaviour {
 		lev = Int32.Parse (LevelReader.Difficulty);
 		second = (int)startTime;
 		level.text = (PlayerController.level+1).ToString();
-		if (lev < 7) {
+		if (lev < 7 && lev != 1) {
 			score.text = GameOverManager.score.ToString ();
 			totalScore.text = "Score: " + score.text;
 		} else
@@ -30,7 +30,7 @@ public class InGameGui : MonoBehaviour {
 	
 	void LateUpdate () {
 		second = (int)startTime;
-		if (lev < 7) {
+		if (lev < 7 && lev != 1) {
 			Timer.text = second + "s";	//Display timer on canvas
 			if (InputReader.isPlayed == false && second != 0)			//Decrement second as long as the timer hasn't reached zero
 				startTime -= Time.deltaTime;
