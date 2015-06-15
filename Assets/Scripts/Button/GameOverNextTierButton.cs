@@ -33,8 +33,10 @@ public class GameOverNextTierButton : MonoBehaviour {
 			ButtonManager.staticDifficulty = difficultyInt.ToString ();
 
 			AutoFade.LoadLevel ("D" + difficultyInt + "L" + maps [0], 1, 3, Color.gray);
-		} else {
-			print("No more levels to play, go to main menu");
+		} else { // If there are no more levels to play in a tier, game goes back to main menu COULD USE A WARNING TO THE PLAYER
+			AutoFade.LoadLevel("Rough", 1,3, Color.gray);
+			PlayerController.level = 0;
+			GameOverManager.score = 0;
 		}
 	}
 }

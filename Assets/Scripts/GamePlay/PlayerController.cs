@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 				break;
 			}
 			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){						//If player is on wheel, pressed space bar, and wheel has not been flipped
-				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
+				wheel.setCollidedFalse();														//Prevents a single wheel from activating twice
 				yield return StartCoroutine(wheel.flip ());
 			}else{
 				getDirection(inputs.inputStrings[i]);													//Evaluate the correct position to move to
@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator setArrowAnimation(int j){
 		//print (j);
 		//print (arrows.Length);
+		// if(arrows.Length > 0) {
 		arrows [j - 1].SetMove ();
 		yield return new WaitForSeconds (0.75f);
 		controller.transform.rotation = Quaternion.LookRotation (direction, Vector3.up);
@@ -156,8 +157,10 @@ public class PlayerController : MonoBehaviour {
 	void nextLevel() {
 		int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
 		//For the tutorial, we want the levels to play in sequence
-		print (difficultyInt + "this is difficulty int");
-		if (level < ButtonManager.maps.Length || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
+		//print (difficultyInt + "this is difficulty int");
+		if (level < ButtonManager.maps.Length) { // || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
+			//print(level + " is the level, " + difficultyInt + " difficulty int ");
+			//print(ButtonManager.maps.Length + " is the maps length");
 			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .75f, .75f, Color.black);
 		}
 	}

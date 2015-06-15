@@ -11,7 +11,7 @@ public class InputHistory : MonoBehaviour {
 	
 	private GameObject childObject;
 	/**
-	 *	Evaluate string paased in and instantiate the corresponding arrow GameObject  
+	 *	Evaluate string passed in and instantiate the corresponding arrow GameObject  
 	 */
 	public void makeArrows(string direction){
 		switch(direction){
