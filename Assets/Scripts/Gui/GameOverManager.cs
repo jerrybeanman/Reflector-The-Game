@@ -33,6 +33,10 @@ public class GameOverManager : MonoBehaviour
 			Social.ReportProgress("CgkIj8vavqsJEAIQAg", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
+		if (ButtonManager.staticDifficulty.Equals ("9") && tierComplete) {
+			Social.ReportProgress("CgkIj8vavqsJEAIQAw", 100.0f, (bool success) => {});
+			tierComplete = false;
+		}
 	}
 	void setAnim(string trigger){
 		switch (trigger) {
@@ -43,7 +47,7 @@ public class GameOverManager : MonoBehaviour
 			break;
 		case "LC" : 
 			anim.SetTrigger("Level Complete");
-			if(addOnce == false){
+			if(addOnce == false && InGameGui.lev < 7 && InGameGui.lev != 1){
 				score += InGameGui.second * 10;
 				timer.score.text = score.ToString();
 				addOnce = true;
