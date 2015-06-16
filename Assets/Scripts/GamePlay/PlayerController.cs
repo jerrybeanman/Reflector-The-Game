@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 				getDirection(inputs.inputStrings[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
 			}
-			yield return new WaitForSeconds(0.8f);												//Wait .8 seconds before moving again
+			yield return new WaitForSeconds(1f);												//Wait .8 seconds before moving again
 		}
 		//If the play gets stranded, i.e doesn't complete the level or fail
 		//Moves on to the next level and player scores 0
