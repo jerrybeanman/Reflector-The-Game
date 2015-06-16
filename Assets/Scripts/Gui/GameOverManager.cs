@@ -41,7 +41,26 @@ public class GameOverManager : MonoBehaviour
 			Social.ReportProgress("CgkIj8vavqsJEAIQAw", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
+
+		// Android button controllers
+		if (Application.platform == RuntimePlatform.Android) {
+			if(Input.GetKey(KeyCode.Escape)) {
+				// Prompt quit
+				// Application.Quit();
+				return;
+			}
+		}
+
+		if (Application.platform == RuntimePlatform.Android) {
+			if(Input.GetKey(KeyCode.Menu)) {
+				// display menu
+				// toggle sound
+				// quit
+				return;
+			}
+		}
 	}
+
 	void setAnim(string trigger){
 		switch (trigger) {
 		case "LF" :
