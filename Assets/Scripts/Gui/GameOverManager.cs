@@ -33,7 +33,7 @@ public class GameOverManager : MonoBehaviour
 			Social.ReportProgress("CgkIj8vavqsJEAIQAQ", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
-		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score > 1000) {
+		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score > 100) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAg", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}

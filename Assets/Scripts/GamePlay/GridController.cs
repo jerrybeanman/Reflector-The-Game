@@ -148,7 +148,10 @@ public class GridController : MonoBehaviour {
 		if (mapSize < 5) {
 			cameraZoom = 1.9f;
 		}
-		if (mapSize >= 7) {
+		if (mapSize == 7) {
+			cameraZoom = 1.3f;
+		}
+		if (mapSize > 7) {
 			cameraZoom = 1.1f;
 		}
 		return new Vector3 (width / 2f - .5f, mapSize * cameraZoom, -height / 2f + .5f);
