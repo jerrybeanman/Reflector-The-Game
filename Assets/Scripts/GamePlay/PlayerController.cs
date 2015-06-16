@@ -144,31 +144,31 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds(1.5f);
 		nextLevel ();
 	}
-
-	// BUG Sometimes this plays twice or more per one fail. If the 'fail sound' happens twice, that is a sign.
+	
 	IEnumerator LoadNextLevelFail() {
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;
-		level++;
+		//level++; moving this to void nextLevel() to see if it fixes problem with level hang
 		yield return new WaitForSeconds (1.5f);
 		nextLevel ();
 	}
 	//note to reader: sorry in advance. Read with caution
 	void nextLevel() {
-		int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
+		level++;
+		//int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
 		//For the tutorial, we want the levels to play in sequence
 		//print (difficultyInt + "this is difficulty int");
 		if (level < ButtonManager.maps.Length) { // || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
 			//print(level + " is the level, " + difficultyInt + " difficulty int ");
 			//print(ButtonManager.maps.Length + " is the maps length");
-			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .75f, .75f, Color.black);
+			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .9f, .9f, Color.black);
 		}
 	}
 	
 	void OnTriggerEnter(Collider hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
 			GameOverManager.levelsPlayed++;
-			level++;
+			//level++;
 			levelComplete = true;
 			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}
