@@ -25,15 +25,15 @@ public class GameOverManager : MonoBehaviour
 			setAnim ("TC");	}
 		if (PlayerController.collided || InGameGui.second == 0 || PlayerController.stranded) {
 			setAnim ("LF"); }
-		if (PlayerController.levelComplete) {
-			setAnim ("LC"); }
 		if (PlayerController.levelComplete && levelsPlayed == ButtonManager.maps.Length) {// && !ButtonManager.staticDifficulty.Equals("1")) {
 			setAnim ("LC");	setAnim ("TC");	}
+		if (PlayerController.levelComplete) {
+			setAnim ("LC"); }
 		if (ButtonManager.staticDifficulty.Equals ("1") && tierComplete) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAQ", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
-		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score > 1000) {
+		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score > 100) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAg", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
