@@ -60,29 +60,6 @@ public class PlayerController : MonoBehaviour {
 			happenOnce = true;
 			StartCoroutine(LoadNextLevelFail());
 		}
-
-		/*
-		// Android button controllers
-		if (Application.platform == RuntimePlatform.Android) {
-			if(Input.GetKey(KeyCode.Escape)) {
-				// Pause the game
-				Time.timeScale = 0.0f;
-				// Prompt quit
-				// Application.Quit();
-				return;
-			}
-		}
-		
-		if (Application.platform == RuntimePlatform.Android) {
-			if(Input.GetKey(KeyCode.Menu)) {
-				// display menu
-				// toggle sound
-				// quit
-				return;
-			}
-		}*/
-
-
 	}
 
 	public IEnumerator RelayedInput(){
@@ -166,13 +143,15 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	IEnumerator LoadNextLevelFail() {
+		if(ButtonManager.staticDifficulty.Equals ("1")) { // If the player fails a level in the tutorial, that level is replayed *NOTE: JUST FOR TUTORIAL
+			level--;
+		}
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;
-		//level++; moving this to void nextLevel() to see if it fixes problem with level hang
 		yield return new WaitForSeconds (1.5f);
 		nextLevel ();
 	}
-	//note to reader: sorry in advance. Read with caution
+	// Loads the next level
 	void nextLevel() {
 		level++;
 		if (level < ButtonManager.maps.Length) { // || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
@@ -183,7 +162,6 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
 			GameOverManager.levelsPlayed++;
-			//level++;
 			levelComplete = true;
 			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}
