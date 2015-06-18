@@ -14,7 +14,6 @@ public class RandomLevelGenerator : MonoBehaviour {
 		while (count < LEVELSPERGAME) {
 			int number = Random.Range (2, filesOfDifficulty + 1);
 			if (!numberContainer.Contains (number)) {
-				print(number);
 				numberContainer [count] = number;
 				count++;
 			}
