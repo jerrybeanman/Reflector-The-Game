@@ -135,9 +135,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator setArrowAnimation(int j){
-		//print (j);
-		//print (arrows.Length);
-		// if(arrows.Length > 0) {
 		arrows [j - 1].SetMove ();
 		yield return new WaitForSeconds (0.75f);
 		controller.transform.rotation = Quaternion.LookRotation (direction, Vector3.up);
@@ -178,12 +175,7 @@ public class PlayerController : MonoBehaviour {
 	//note to reader: sorry in advance. Read with caution
 	void nextLevel() {
 		level++;
-		//int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
-		//For the tutorial, we want the levels to play in sequence
-		//print (difficultyInt + "this is difficulty int");
 		if (level < ButtonManager.maps.Length) { // || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
-			//print(level + " is the level, " + difficultyInt + " difficulty int ");
-			//print(ButtonManager.maps.Length + " is the maps length");
 			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .9f, .9f, Color.black);
 		}
 	}
