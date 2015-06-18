@@ -5,6 +5,7 @@ using System;
 
 public class InGameGui : MonoBehaviour {
 
+
 	public Text score;
 	public Text totalScore;
 	public Text Timer;				//Text component to display onto the canvas
@@ -39,6 +40,7 @@ public class InGameGui : MonoBehaviour {
 			Timer.text = "∞";
 			totalScore.text = "Score: " + "∞";
 		}
+
 	}
 }
 
