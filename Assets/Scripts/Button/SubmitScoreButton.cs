@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using UnityEngine.UI;
 
 public class SubmitScoreButton : MonoBehaviour {
@@ -10,7 +11,7 @@ public class SubmitScoreButton : MonoBehaviour {
 		SubmitButton.onClick.AddListener(() => { 
 			Animator anim = GetComponent<Animator>();
 			anim.SetTrigger("Clicked");
-			postScore (LevelReader.Difficulty);
+			postScore (Int32.Parse(LevelReader.Difficulty));
 		});
 	}
 

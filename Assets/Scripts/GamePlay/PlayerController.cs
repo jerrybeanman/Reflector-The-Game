@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 		LevelCompleteSound = sounds [0];
 		PlayerDeath = sounds [1];
 		playButton.onClick.AddListener (() => {
-			if(InputReader.isPlayed == false){
+			if(InputReader.isPlayed == false && InGameGui.paused == false){
 				InputReader.isPlayed = true;
 				StartCoroutine("RelayedInput");
 			}
@@ -60,6 +60,29 @@ public class PlayerController : MonoBehaviour {
 			happenOnce = true;
 			StartCoroutine(LoadNextLevelFail());
 		}
+
+		/*
+		// Android button controllers
+		if (Application.platform == RuntimePlatform.Android) {
+			if(Input.GetKey(KeyCode.Escape)) {
+				// Pause the game
+				Time.timeScale = 0.0f;
+				// Prompt quit
+				// Application.Quit();
+				return;
+			}
+		}
+		
+		if (Application.platform == RuntimePlatform.Android) {
+			if(Input.GetKey(KeyCode.Menu)) {
+				// display menu
+				// toggle sound
+				// quit
+				return;
+			}
+		}*/
+
+
 	}
 
 	public IEnumerator RelayedInput(){
