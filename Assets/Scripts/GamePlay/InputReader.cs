@@ -27,10 +27,12 @@ public class InputReader : MonoBehaviour {
 		undoButton = GameObject.Find ("Undo").GetComponent<Button> ();
 		flipButton = GameObject.Find ("FlipButton").GetComponent<Button> ();
 			undoButton.onClick.AddListener (() => {
-				recordInputsHelper ("Delete");
+				if(InGameGui.paused ==false)
+					recordInputsHelper ("Delete");
 			});
 			flipButton.onClick.AddListener (() => {
-				recordInputsHelper ("Space");
+				if(InGameGui.paused == false)
+					recordInputsHelper ("Space");
 			});
 	}
 
@@ -42,7 +44,7 @@ public class InputReader : MonoBehaviour {
 
 
 	void recordInputs(){
-		//if (isPlayed == false) {										//If user has not entered the return key
+		if (InGameGui.paused == false) {										//If user has not entered the return key
 			#if UNITY_EDITOR
 			if (Input.GetKeyDown (KeyCode.RightArrow)) 	{recordInputsHelper("R");} else 		//Store each keystrokes
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) 	{recordInputsHelper("L");} else 		//as a string value into 
@@ -110,7 +112,7 @@ public class InputReader : MonoBehaviour {
 				}
 			}
 			#endif	
-		//}
+		}
 	}
 
 	public void recordInputsHelper(string direction){

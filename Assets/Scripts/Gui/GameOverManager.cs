@@ -37,28 +37,12 @@ public class GameOverManager : MonoBehaviour
 			Social.ReportProgress("CgkIj8vavqsJEAIQAg", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
-		if (ButtonManager.staticDifficulty.Equals ("9") && tierComplete) {
+		// do not currently have a tier 9
+		/*if (ButtonManager.staticDifficulty.Equals ("9") && tierComplete) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAw", 100.0f, (bool success) => {});
 			tierComplete = false;
-		}
+		}*/
 
-		// Android button controllers
-		if (Application.platform == RuntimePlatform.Android) {
-			if(Input.GetKey(KeyCode.Escape)) {
-				// Prompt quit
-				// Application.Quit();
-				return;
-			}
-		}
-
-		if (Application.platform == RuntimePlatform.Android) {
-			if(Input.GetKey(KeyCode.Menu)) {
-				// display menu
-				// toggle sound
-				// quit
-				return;
-			}
-		}
 	}
 
 	void setAnim(string trigger){
