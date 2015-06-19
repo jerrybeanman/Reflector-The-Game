@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	IEnumerator LoadNextLevelFail() {
-		if(ButtonManager.staticDifficulty.Equals ("1")) { // If the player fails a level in the tutorial, that level is replayed *NOTE: JUST FOR TUTORIAL
+		if(ButtonManager.staticDifficulty.Equals ("1") || ButtonManager.staticDifficulty.Equals ("7") || ButtonManager.staticDifficulty.Equals ("8")) { // If the player fails a level in the tutorial or complexity that level is replayed
 			level--;
 			GameOverManager.levelsPlayed--;
 		}

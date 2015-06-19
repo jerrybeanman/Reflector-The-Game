@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using System;
 
 public class InGameGui : MonoBehaviour {
-
+	private Button mainMenu;
+	private Button notmainMenu;
 	private Button notQuit;
 	private Button quit;
 	public Text score;
@@ -43,6 +44,19 @@ public class InGameGui : MonoBehaviour {
 			quit.onClick.AddListener (() => {
 				Application.Quit ();
 			});
+			
+			notmainMenu = GameObject.Find("No").GetComponent<Button>();
+			notmainMenu.onClick.AddListener(() =>{
+				anim.SetTrigger("notMainMenu");
+				paused = false;
+			});
+			
+			mainMenu = GameObject.Find("Yes").GetComponent<Button>();
+			mainMenu.onClick.AddListener(() =>{	
+				AutoFade.LoadLevel("Rough", 1,3, Color.gray);
+				PlayerController.level = 0;
+				GameOverManager.score = 0;
+			});
 		}
 	}
 
@@ -62,6 +76,12 @@ public class InGameGui : MonoBehaviour {
 		if ((Input.GetKeyDown (KeyCode.B) || Input.GetKey(KeyCode.Escape) && paused == false)) {
 				paused = true;
 				anim.SetTrigger("Quit");
+		}
+		
+		// If C is pressed on a computer, or Andriod back button, 
+		if ((Input.GetKeyDown (KeyCode.C) || Input.GetKey(KeyCode.Menu) && paused == false)) {
+				paused = true;
+				anim.SetTrigger("MainMenu");
 		}
 
 	}
