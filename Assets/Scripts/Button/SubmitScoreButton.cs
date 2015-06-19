@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using UnityEngine.UI;
 
 public class SubmitScoreButton : MonoBehaviour {
@@ -10,9 +11,28 @@ public class SubmitScoreButton : MonoBehaviour {
 		SubmitButton.onClick.AddListener(() => { 
 			Animator anim = GetComponent<Animator>();
 			anim.SetTrigger("Clicked");
-			Social.ReportScore(GameOverManager.score, "CgkIj8vavqsJEAIQBg", (bool success) => {
-				// handle success or failure
-			});
+			postScore (Int32.Parse(LevelReader.Difficulty));
 		});
+	}
+
+
+	void postScore(int lev){
+		switch (lev) {
+		case 2 :
+			Social.ReportScore(GameOverManager.score, "CgkIj8vavqsJEAIQCQ", (bool success) => {});
+			break;
+		case 3 : 
+			Social.ReportScore(GameOverManager.score, "CgkIj8vavqsJEAIQCg", (bool success) => {});
+			break;
+		case 4 : 
+			Social.ReportScore(GameOverManager.score, "CgkIj8vavqsJEAIQCw", (bool success) => {});
+			break;
+		case 5 : 
+			Social.ReportScore(GameOverManager.score, "CgkIj8vavqsJEAIQDA", (bool success) => {});
+			break;
+		case 6 : 
+			Social.ReportScore(GameOverManager.score, "CgkIj8vavqsJEAIQDQ", (bool success) => {});
+			break;
+		}
 	}
 }

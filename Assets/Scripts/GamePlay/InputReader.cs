@@ -24,14 +24,16 @@ public class InputReader : MonoBehaviour {
 	}
 
 	void Start(){
-		undoButton = GameObject.Find ("UndoButton").GetComponent<Button> ();
+		undoButton = GameObject.Find ("Undo").GetComponent<Button> ();
 		flipButton = GameObject.Find ("FlipButton").GetComponent<Button> ();
-		undoButton.onClick.AddListener (() => {
-			recordInputsHelper("Delete");
-		});
-		flipButton.onClick.AddListener (() => {
-			recordInputsHelper("Space");
-		});
+			undoButton.onClick.AddListener (() => {
+				if(InGameGui.paused ==false)
+					recordInputsHelper ("Delete");
+			});
+			flipButton.onClick.AddListener (() => {
+				if(InGameGui.paused == false)
+					recordInputsHelper ("Space");
+			});
 	}
 
 	
@@ -42,7 +44,7 @@ public class InputReader : MonoBehaviour {
 
 
 	void recordInputs(){
-		if (isPlayed == false) {										//If user has not entered the return key
+		if (InGameGui.paused == false) {										//If user has not entered the return key
 			#if UNITY_EDITOR
 			if (Input.GetKeyDown (KeyCode.RightArrow)) 	{recordInputsHelper("R");} else 		//Store each keystrokes
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) 	{recordInputsHelper("L");} else 		//as a string value into 
@@ -114,12 +116,17 @@ public class InputReader : MonoBehaviour {
 	}
 
 	public void recordInputsHelper(string direction){
+		if (isPlayed == false) {
 		inputStrings.Add (direction); inputs.makeArrows(direction);	//Reduce code usage for the recordInputs() method
-		if(direction == "Delete"){
-			GameObject[] a = GameObject.FindGameObjectsWithTag("Arrow");
-			Destroy(a[a.Length -1]);
-			inputStrings.RemoveAt(inputStrings.Count-1);
-			inputStrings.RemoveAt(inputStrings.Count-1);
+
+			if (direction == "Delete") {
+				GameObject[] a = GameObject.FindGameObjectsWithTag ("Arrow");
+				if (a.Length > 0) {										//Prevents out of index error if there are no movements and player presses backspace
+					Destroy (a [a.Length - 1]);
+					inputStrings.RemoveAt (inputStrings.Count - 1);
+					inputStrings.RemoveAt (inputStrings.Count - 1);
+				}
+			}
 		}
 	}	
 }

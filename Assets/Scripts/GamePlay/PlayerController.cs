@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 		LevelCompleteSound = sounds [0];
 		PlayerDeath = sounds [1];
 		playButton.onClick.AddListener (() => {
-			if(InputReader.isPlayed == false){
+			if(InputReader.isPlayed == false && InGameGui.paused == false){
 				InputReader.isPlayed = true;
 				StartCoroutine("RelayedInput");
 			}
@@ -71,13 +71,13 @@ public class PlayerController : MonoBehaviour {
 				break;
 			}
 			if(wheel.getCollided() && inputs.inputStrings[i] == "Space" ){						//If player is on wheel, pressed space bar, and wheel has not been flipped
-				wheel.setCollidedFalse();														//Prevets a single wheel from activating twice
+				wheel.setCollidedFalse();														//Prevents a single wheel from activating twice
 				yield return StartCoroutine(wheel.flip ());
 			}else{
 				getDirection(inputs.inputStrings[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
 			}
-			yield return new WaitForSeconds(0.8f);												//Wait .8 seconds before moving again
+			yield return new WaitForSeconds(1f);												//Wait .8 seconds before moving again
 		}
 		//If the play gets stranded, i.e doesn't complete the level or fail
 		//Moves on to the next level and player scores 0
@@ -112,8 +112,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator setArrowAnimation(int j){
-		//print (j);
-		//print (arrows.Length);
 		arrows [j - 1].SetMove ();
 		yield return new WaitForSeconds (0.75f);
 		controller.transform.rotation = Quaternion.LookRotation (direction, Vector3.up);
@@ -143,29 +141,27 @@ public class PlayerController : MonoBehaviour {
 		yield return new WaitForSeconds(1.5f);
 		nextLevel ();
 	}
-
-	// BUG Sometimes this plays twice or more per one fail. If the 'fail sound' happens twice, that is a sign.
+	
 	IEnumerator LoadNextLevelFail() {
+		if(ButtonManager.staticDifficulty.Equals ("1")) { // If the player fails a level in the tutorial, that level is replayed *NOTE: JUST FOR TUTORIAL
+			level--;
+		}
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;
-		level++;
 		yield return new WaitForSeconds (1.5f);
 		nextLevel ();
 	}
-	//note to reader: sorry in advance. Read with caution
+	// Loads the next level
 	void nextLevel() {
-		int difficultyInt = Int32.Parse (ButtonManager.staticDifficulty);
-		//For the tutorial, we want the levels to play in sequence
-		print (difficultyInt + "this is difficulty int");
-		if (level < ButtonManager.maps.Length || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
-			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .75f, .75f, Color.black);
+		level++;
+		if (level < ButtonManager.maps.Length) { // || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
+			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .9f, .9f, Color.black);
 		}
 	}
 	
 	void OnTriggerEnter(Collider hit){
 		if (hit.gameObject.tag == "End" && temp == level) {
 			GameOverManager.levelsPlayed++;
-			level++;
 			levelComplete = true;
 			StartCoroutine(LoadNextLevel(LevelCompleteSound));
 		}

@@ -1,3 +1,1 @@
-E f
-1 f
-S f 2
+S f W f Z 0

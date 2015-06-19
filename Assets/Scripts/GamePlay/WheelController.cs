@@ -59,14 +59,14 @@ public class WheelController : MonoBehaviour {
 				newPos = new Vector3(GridController.width - obstacles[i].transform.position.x - 1, GridController.object_height , obstacles[i].transform.position.z);
 				anim = obstacles[i].GetComponent<Animator>();
 				anim.SetTrigger("Destroy");
-				yield return new WaitForSeconds(0.3f);
+				yield return new WaitForSeconds(0.6f);
 				reInstantiate(obstacles[i], newPos);
 				break;
 			case 90:
 				newPos = new Vector3(obstacles[i].transform.position.x, GridController.object_height, -GridController.height - obstacles[i].transform.position.z + 1);
 				anim = obstacles[i].GetComponent<Animator>();
 				anim.SetTrigger("Destroy");
-				yield return new WaitForSeconds(0.3f);
+				yield return new WaitForSeconds(0.6f);
 				reInstantiate(obstacles[i], newPos);
 				break;
 			case 45:
@@ -74,7 +74,7 @@ public class WheelController : MonoBehaviour {
 				newPos = new Vector3(GridController.height + obstacles[i].transform.position.z - 1, GridController.object_height, -GridController.width + obstacles[i].transform.position.x + 1);
 				anim = obstacles[i].GetComponent<Animator>();
 				anim.SetTrigger("Destroy");
-				yield return new WaitForSeconds(0.3f);
+				yield return new WaitForSeconds(0.6f);
 				reInstantiate(obstacles[i], newPos);
 				break;
 			case 315:
@@ -82,7 +82,7 @@ public class WheelController : MonoBehaviour {
 				newPos = new Vector3(-obstacles[i].transform.position.z, GridController.object_height, -obstacles[i].transform.position.x);
 				anim = obstacles[i].GetComponent<Animator>();
 				anim.SetTrigger("Destroy");
-				yield return new WaitForSeconds(0.3f);
+				yield return new WaitForSeconds(0.6f);
 				reInstantiate(obstacles[i], newPos);
 				break;
 			}
