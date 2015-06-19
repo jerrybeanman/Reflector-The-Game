@@ -31,11 +31,12 @@ public class GameOverManager : MonoBehaviour
 			setAnim ("LC");	setAnim ("TC");	}
 		if (PlayerController.levelComplete) {
 			setAnim ("LC"); }
+		// Achievements
+
 		if (ButtonManager.staticDifficulty.Equals ("1") && tierComplete) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAQ", 100.0f, (bool success) => {});
 			tierComplete = false;
 		}
-		// Achievements
 
 		// Tier 1
 		// Tier 1 Apprentice
