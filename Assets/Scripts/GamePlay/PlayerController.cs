@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator LoadNextLevelFail() {
 		if(ButtonManager.staticDifficulty.Equals ("1")) { // If the player fails a level in the tutorial, that level is replayed *NOTE: JUST FOR TUTORIAL
 			level--;
+			GameOverManager.levelsPlayed--;
 		}
 		PlayerDeath.Play ();
 		GameOverManager.levelsPlayed++;

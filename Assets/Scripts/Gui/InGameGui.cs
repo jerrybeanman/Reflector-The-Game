@@ -41,7 +41,6 @@ public class InGameGui : MonoBehaviour {
 
 			quit = GameObject.Find ("QuitButton").GetComponent<Button> ();
 			quit.onClick.AddListener (() => {
-				print ("In quit");
 				Application.Quit ();
 			});
 		}
@@ -60,7 +59,7 @@ public class InGameGui : MonoBehaviour {
 		}
 
 		// If B is pressed on a computer, or Andriod back button, 
-		if (Input.GetKeyDown (KeyCode.B) || Input.GetKey(KeyCode.Escape)) {
+		if ((Input.GetKeyDown (KeyCode.B) || Input.GetKey(KeyCode.Escape) && paused == false)) {
 				paused = true;
 				anim.SetTrigger("Quit");
 		}
