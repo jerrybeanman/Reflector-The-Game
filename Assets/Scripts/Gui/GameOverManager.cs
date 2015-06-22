@@ -35,93 +35,94 @@ public class GameOverManager : MonoBehaviour
 
 		if (ButtonManager.staticDifficulty.Equals ("1") && tierComplete) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAQ", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 
 		// Tier 1
 		// Tier 1 Apprentice
 		if (ButtonManager.staticDifficulty.Equals ("2") && tierComplete && score >= 700) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAg", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 1 Adept
 		if (ButtonManager.staticDifficulty.Equals ("2") && tierComplete && score >= 790) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQAw", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 1 Master
 		if (ButtonManager.staticDifficulty.Equals ("2") && tierComplete && score >= 820) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQBw", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 
 		// Tier 2
 		// Tier 2 Apprentice
 		if (ButtonManager.staticDifficulty.Equals ("3") && tierComplete && score >= 700) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQCA", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 2 Adept
 		if (ButtonManager.staticDifficulty.Equals ("3") && tierComplete && score >= 760) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQDg", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 2 Master
 		if (ButtonManager.staticDifficulty.Equals ("3") && tierComplete && score >= 790) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQDw", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 
 		// Tier 3
 		// Tier 3 Apprentice
 		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score >= 700) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQEA", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 3 Adept
 		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score >= 760) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQEQ", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 3 Master
 		if (ButtonManager.staticDifficulty.Equals ("4") && tierComplete && score >= 790) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQEg", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 
 		// Tier 4
 		// Tier 4 Apprentice
 		if (ButtonManager.staticDifficulty.Equals ("5") && tierComplete && score >= 620) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQEw", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 4 Adept
 		if (ButtonManager.staticDifficulty.Equals ("5") && tierComplete && score >= 700) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQFA", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 4 Master
 		if (ButtonManager.staticDifficulty.Equals ("5") && tierComplete && score >= 740) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQFQ", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 
 		// Tier 5
 		// Tier 5 Apprentice
 		if (ButtonManager.staticDifficulty.Equals ("6") && tierComplete && score >= 600) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQFg", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 5 Adept
 		if (ButtonManager.staticDifficulty.Equals ("6") && tierComplete && score >= 650) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQFw", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
 		// Tier 5 Master
 		if (ButtonManager.staticDifficulty.Equals ("6") && tierComplete && score >= 700) {
 			Social.ReportProgress("CgkIj8vavqsJEAIQGA", 100.0f, (bool success) => {});
-			tierComplete = false;
+			//tierComplete = false;
 		}
+		tierComplete = false;
 	}
 
 	void setAnim(string trigger){

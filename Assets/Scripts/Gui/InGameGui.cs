@@ -54,7 +54,9 @@ public class InGameGui : MonoBehaviour {
 			mainMenu = GameObject.Find("Yes").GetComponent<Button>();
 			mainMenu.onClick.AddListener(() =>{	
 				AutoFade.LoadLevel("Rough", 1,3, Color.gray);
+				paused = false;
 				PlayerController.level = 0;
+				GameOverManager.levelsPlayed = 0;
 				GameOverManager.score = 0;
 			});
 		}
