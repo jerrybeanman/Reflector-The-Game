@@ -77,9 +77,9 @@ public class PlayerController : MonoBehaviour {
 				getDirection(inputs.inputStrings[i]);													//Evaluate the correct position to move to
 				Move (j);																		//Move the player towards that position
 			}
-			yield return new WaitForSeconds(1f);												//Wait .8 seconds before moving again
+			yield return new WaitForSeconds(1f);												//Wait 1 second before moving again
 		}
-		//If the play gets stranded, i.e doesn't complete the level or fail
+		//If the player gets stranded, i.e doesn't complete the level or fail
 		//Moves on to the next level and player scores 0
 		if(levelComplete == false && i == (inputs.inputStrings.Count) && failedOnce == false){ //|| (levelComplete == false && failedOnce == false)) {
 			stranded = true;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	IEnumerator LoadNextLevelFail() {
-		if(ButtonManager.staticDifficulty.Equals ("1") || ButtonManager.staticDifficulty.Equals ("7") || ButtonManager.staticDifficulty.Equals ("8")) { // If the player fails a level in the tutorial or complexity that level is replayed
+		if(ButtonManager.staticTimer) {	
 			level--;
 			GameOverManager.levelsPlayed--;
 		}
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour {
 	// Loads the next level
 	void nextLevel() {
 		level++;
-		if (level < ButtonManager.maps.Length) { // || difficultyInt < RandomLevelGenerator.LEVELSPERGAME) { // change this for tutorial
+		if (level < ButtonManager.maps.Length) {
 			AutoFade.LoadLevel ("D" + ButtonManager.staticDifficulty + "L" + ButtonManager.maps [level], .9f, .9f, Color.black);
 		}
 	}

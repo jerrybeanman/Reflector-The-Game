@@ -5,14 +5,13 @@ using System.Linq;
 public class RandomLevelGenerator : MonoBehaviour {
 
 	public static readonly int LEVELSPERGAME = 5;
-	private static readonly int LEVELSINTUTORIAL = 8;
 	public static readonly int MAXLEVELS = 6; // this is the max levels for speed games
 
 	public static int[] randomMapPool(int filesOfDifficulty) {
 		int[] numberContainer = new int[LEVELSPERGAME];
 		int count = 0;
 		while (count < LEVELSPERGAME) {
-			int number = Random.Range (2, filesOfDifficulty + 1);
+			int number = Random.Range (1, filesOfDifficulty + 1);
 			if (!numberContainer.Contains (number)) {
 				numberContainer [count] = number;
 				count++;

@@ -16,5 +16,7 @@ public class GameOverMainMenuButton : MonoBehaviour {
 		AutoFade.LoadLevel("Rough", 1,3, Color.gray);
 		PlayerController.level = 0;
 		GameOverManager.score = 0;
+		GameOverManager.levelsPlayed = 0;
+		GameOverManager.tierComplete = true;
 	}
 }

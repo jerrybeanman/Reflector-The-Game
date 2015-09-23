@@ -24,7 +24,7 @@ public class InGameGui : MonoBehaviour {
 		lev = Int32.Parse (LevelReader.Difficulty);
 		second = (int)startTime;
 		level.text = (PlayerController.level+1).ToString();
-		if (lev < 7 && lev != 1) { // Excludes tutorial levels and complexity levels
+		if(!ButtonManager.staticTimer) {
 			score.text = GameOverManager.score.ToString ();
 			totalScore.text = "Score: " + score.text;
 		} else
@@ -64,9 +64,9 @@ public class InGameGui : MonoBehaviour {
 
 	void LateUpdate () {
 		second = (int)startTime;
-		if (lev < 7 && lev != 1) { // Excludes tutorial levels and complexity levels
-			Timer.text = second.ToString();	//Display timer on canvas
-			if (InputReader.isPlayed == false && second != 0 && paused == false)			//Decrement second as long as the timer hasn't reached zero
+		if(!ButtonManager.staticTimer) {
+			Timer.text = second.ToString();											//Display timer on canvas
+			if (InputReader.isPlayed == false && second != 0 && paused == false)	//Decrement second as long as the timer hasn't reached zero
 				startTime -= Time.deltaTime;
 			totalScore.text = "Score: " + GameOverManager.score.ToString ();
 		} else {
